@@ -5,6 +5,7 @@ import warnings
 import pandas as pd
 from pptx.dml.color import RGBColor
 from pptx.enum.text import MSO_AUTO_SIZE, MSO_VERTICAL_ANCHOR
+from pptx.oxml.ns import qn
 from pptx.util import Pt, Inches
 
 from cv import get_largest_white_region_in_slide
@@ -163,6 +164,20 @@ def make_page_right(presentation, theme, numbers, titles, texts, keywords, index
             text_frame_common.paragraphs[0].font.size = Inches(0.25)
             text_frame_common.paragraphs[0].font.word_wrap = True
             text_frame_common.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
+            for child in text_box_common._element.spPr:
+                print(child.tag)
+                xfrm_attrs = child.attrib
+                for sub_child in child:
+                    print(xfrm_attrs.items())
+                    if 'off' in sub_child.tag:
+                        off_attrs = sub_child.attrib
+                        for attr_name, attr_value in off_attrs.items():
+                            print(f"off - {attr_name}: {attr_value}")
+                    elif 'ext' in sub_child.tag:
+                        ext_attrs = sub_child.attrib
+                        for attr_name, attr_value in ext_attrs.items():
+                            print(f"ext - {attr_name}: {attr_value}")
+
             if texts[subtitle_by_index[idx]] is not None and str(texts[subtitle_by_index[idx]]) != "nan":
                 text_box_common2 = group_shape.shapes.add_textbox(Inches(4.6), Inches(0.3 + idx * 0.8 + 0.5), Inches(4.8),
                                                                   Inches(0.8))
