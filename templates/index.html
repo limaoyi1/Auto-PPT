@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI生成PPT</title>
+    <meta charset="UTF-8">
+    <style>
+        /* 页面容器 */
+        .container {
+            background-image: url('https://img1.imgtp.com/2023/06/29/Y96J5PBc.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 内容样式 */
+        .content {
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        /*.container {*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*    align-items: center;*/
+        /*    justify-content: center;*/
+        /*    height: 100vh;*/
+        /*}*/
+
+        /*.input-row {*/
+        /*    margin-bottom: 10px;*/
+        /*}*/
+
+        /*.input-row input {*/
+        /*    width: 200px;*/
+        /*}*/
+
+        /*.input-row button {*/
+        /*    margin-left: 10px;*/
+        /*}*/
+
+        /* 大标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <h1>AI生成PPT</h1>
+
+        <div class="container">
+            <div class="input-row">
+                <input type="text" id="titleInput" placeholder="输入标题"/>
+                <button onclick="callAPI()">确认</button>
+            </div>
+            <div class="input-row">
+                <p id="loadingText" style="display: none;">正在生成 PPT，请稍候...</p>
+            </div>
+        </div>
+
+        <script>
+            function callAPI() {
+                var title = document.getElementById("titleInput").value;
+                var url = "http://127.0.0.1:5000/ppt?title=" + encodeURIComponent(title);
+
+                // 显示加载文本
+                var loadingText = document.getElementById("loadingText");
+                loadingText.style.display = "block";
+
+                // 发送 HTTP GET 请求获取流数据
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('网络请求错误');
+                        }
+                        return response.blob(); // 获取响应数据的二进制流
+                    })
+                    .then(blob => {
+                        // 创建 URL 对象
+                        var url = URL.createObjectURL(blob);
+
+                        // 创建一个链接并模拟点击下载
+                        var link = document.createElement("a");
+                        link.href = url;
+                        link.download = "presentation.pptx"; // 下载的文件名
+                        link.click();
+
+                        // 清除 URL 对象
+                        URL.revokeObjectURL(url);
+
+                        // 隐藏加载文本
+                        loadingText.style.display = "none";
+                    })
+                    .catch(error => {
+                        // 处理错误
+                        console.error(error);
+
+                        // 隐藏加载文本
+                        loadingText.style.display = "none";
+                    });
+            }
+
+        </script>
+    </div>
+</div>
+</body>
+</html>
