@@ -26,7 +26,7 @@
 > 2. 激活虚拟环境
 
 ```bash
-   . venv/bin/activat e
+   . venv/bin/activate
 ```
 
 > 3. 安装要求的python组件
