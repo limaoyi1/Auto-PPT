@@ -60,11 +60,13 @@ def make_page_left(presentation, theme, numbers, titles, texts, keywords, index)
     print(subtitle_by_index, '=================================')
     group_shape = slide.shapes.add_group_shape()
     group_shape.height = presentation.slide_height
-
+    # 偏移值
+    offset = 0
     for idx in range(len(subtitle_by_index)):
-        if (idx != 0):
-            text_box_common = group_shape.shapes.add_textbox(Inches(0.8), Inches(0.4 + idx * 0.8), Inches(4.8),
-                                                             Inches(0.8))
+        if idx != 0:
+            text_box_common = group_shape.shapes.add_textbox(Inches(0.8), Inches(1.1 + offset), Inches(4.8),
+                                                             Inches(0.4))
+            offset = offset + 0.4
             text_frame_common = text_box_common.text_frame
             text_frame_common.paragraphs[0].text = titles[subtitle_by_index[idx]]
             text_frame_common.paragraphs[0].font.bold = True
@@ -74,8 +76,10 @@ def make_page_left(presentation, theme, numbers, titles, texts, keywords, index)
             text_frame_common.paragraphs[0].font.word_wrap = True
             text_frame_common.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
             if texts[subtitle_by_index[idx]] is not None and str(texts[subtitle_by_index[idx]]) != "nan":
-                text_box_common2 = group_shape.shapes.add_textbox(Inches(0.7), Inches(0.3 + idx * 0.8 + 0.5), Inches(4.8),
-                                                                  Inches(0.8))
+                height = (len("\t" + texts[subtitle_by_index[idx]]) / (4.8 / 0.15) + 1) * 0.16 + 0.1
+                text_box_common2 = group_shape.shapes.add_textbox(Inches(0.7), Inches(1.1 + offset), Inches(4.8),
+                                                                  Inches(height))
+                offset = height + offset
                 text_frame_common2 = text_box_common2.text_frame
                 text_frame_common2.paragraphs[0].text = str("\t" + texts[subtitle_by_index[idx]])
                 text_frame_common2.paragraphs[0].font.name = "微软雅黑"
@@ -152,10 +156,16 @@ def make_page_right(presentation, theme, numbers, titles, texts, keywords, index
     group_shape = slide.shapes.add_group_shape()
     group_shape.height = presentation.slide_height
 
+    # 偏移值
+    offset = 0
     for idx in range(len(subtitle_by_index)):
         if (idx != 0):
-            text_box_common = group_shape.shapes.add_textbox(Inches(4.6), Inches(0.4 + idx * 0.8), Inches(4.8),
-                                                             Inches(0.8))
+            text_box_common = group_shape.shapes.add_textbox(Inches(4.6), Inches(1.1 + offset), Inches(4.8),
+                                                             Inches(0.4))
+            offset = offset + 0.4
+            # 设置文本框自适应
+            text_box_common.word_wrap = True
+            text_box_common.auto_size = True
             text_frame_common = text_box_common.text_frame
             text_frame_common.paragraphs[0].text = titles[subtitle_by_index[idx]]
             text_frame_common.paragraphs[0].font.bold = True
@@ -164,23 +174,30 @@ def make_page_right(presentation, theme, numbers, titles, texts, keywords, index
             text_frame_common.paragraphs[0].font.size = Inches(0.25)
             text_frame_common.paragraphs[0].font.word_wrap = True
             text_frame_common.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
-            for child in text_box_common._element.spPr:
-                print(child.tag)
-                xfrm_attrs = child.attrib
-                for sub_child in child:
-                    print(xfrm_attrs.items())
-                    if 'off' in sub_child.tag:
-                        off_attrs = sub_child.attrib
-                        for attr_name, attr_value in off_attrs.items():
-                            print(f"off - {attr_name}: {attr_value}")
-                    elif 'ext' in sub_child.tag:
-                        ext_attrs = sub_child.attrib
-                        for attr_name, attr_value in ext_attrs.items():
-                            print(f"ext - {attr_name}: {attr_value}")
-
+            text_frame_common.auto_size = MSO_AUTO_SIZE.NONE
+            # cy = None
+            # for child in text_box_common._element.spPr:
+            #     print(child.tag)
+            #     xfrm_attrs = child.attrib
+            #     for sub_child in child:
+            #         if 'off' in sub_child.tag:
+            #             pass
+            #             # off_attrs = sub_child.attrib
+            #             # for attr_name, attr_value in off_attrs.items():
+            #                 # print(f"off - {attr_name}: {attr_value}")
+            #         elif 'ext' in sub_child.tag:
+            #             ext_attrs = sub_child.attrib
+            #             for attr_name, attr_value in ext_attrs.items():
+            #                 # print(f"ext - {attr_name}: {attr_value}")
+            #                 if attr_name == "cy":
+            #                     cy = int(attr_value)
+            # print(f"cy 等于 {cy}")
             if texts[subtitle_by_index[idx]] is not None and str(texts[subtitle_by_index[idx]]) != "nan":
-                text_box_common2 = group_shape.shapes.add_textbox(Inches(4.6), Inches(0.3 + idx * 0.8 + 0.5), Inches(4.8),
-                                                                  Inches(0.8))
+                height = (len("\t" + texts[subtitle_by_index[idx]]) / (4.8 / 0.15) + 1) * 0.16 + 0.1
+                text_box_common2 = group_shape.shapes.add_textbox(Inches(4.6), Inches(1.1 + offset), Inches(4.8),
+                                                                  Inches(height))
+                offset = height + offset
+                # 设置文本框自适应
                 text_frame_common2 = text_box_common2.text_frame
                 text_frame_common2.paragraphs[0].text = str("\t" + texts[subtitle_by_index[idx]])
                 text_frame_common2.paragraphs[0].font.name = "微软雅黑"
@@ -190,7 +207,7 @@ def make_page_right(presentation, theme, numbers, titles, texts, keywords, index
                 text_frame_common2.word_wrap = True
                 text_frame_common2.paragraphs[0].space_after = Inches(0.1)
                 text_frame_common2.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
-                text_frame_common2.auto_size = MSO_AUTO_SIZE.SHAPE_TO_FIT_TEXT
+                text_frame_common2.auto_size = MSO_AUTO_SIZE.NONE
     # 添加插图
     # 获取二级插图keywords
     keywords_index_ = keywords[index]
