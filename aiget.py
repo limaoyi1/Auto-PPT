@@ -1,11 +1,3 @@
-import os
-from io import StringIO
-
-import pandas as pd
-# from langchain import OpenAI
-
-from pptx import Presentation
-
 import warnings
 
 import openai
