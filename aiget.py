@@ -2,29 +2,35 @@ import os
 from io import StringIO
 
 import pandas as pd
-from langchain import OpenAI
+# from langchain import OpenAI
 
 from pptx import Presentation
 
 import warnings
 
+import openai
+
 warnings.filterwarnings('ignore')
 
 import codecs
 import configparser
+
 config = configparser.ConfigParser()
 # 指定编码为 UTF-8
 config.read_file(codecs.open('config.ini', 'r', 'utf-8-sig'))
 Real_File = config.get('Credentials', 'Real_File')
 if Real_File == "Config.ini":
-    OPENAI_API_KEY = config.get('Credentials', 'OPENAI_API_KEY')
+    openai.api_base = config.get('Credentials', 'OPENAI_BASE_URL')
+    openai.api_key = config.get('Credentials', 'OPENAI_API_KEY')
+    pass
 else:
     config.read_file(codecs.open(Real_File, 'r', 'utf-8-sig'))
-    OPENAI_API_KEY = config.get('Credentials', 'OPENAI_API_KEY')
+    openai.api_base = config.get('Credentials', 'OPENAI_BASE_URL')
+    openai.api_key = config.get('Credentials', 'OPENAI_API_KEY')
 
 
 def get_gpt_data(title):
-    llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-16k", max_tokens=10000)
+    # llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-16k", max_tokens=10000)
     if title is None or title == "":
         raise ValueError("主题不能为空")
     # v1
@@ -117,12 +123,14 @@ def get_gpt_data(title):
                 8. The contents of 'title' and 'content' should be answered in Chinese. 'keyword' is one or more key English words after the summary, use '&' to splice.
                 9. If the text cannot be generated as required, please tell me the reason.
 """
-    text1 = llm(textV4)
-    print(text1)
-    return text1
+    # text1 = llm(textV4)
+    # 非流式传输
+    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k", messages=[{"role": "user", "content": textV4}])
+    print(completion.choices[0].message.content)
+    return completion.choices[0].message.content
 
 
-def get_gpt_expand(titles,contents):
+def get_gpt_expand(titles, contents):
     llm = OpenAI(temperature=0.9, model_name="gpt-3.5-turbo", max_tokens=3300)
     text = "帮助我补充一份csv内容格式的文本。这份csv有3个Column:title,content,expand。" \
            "需要你通过标题 'tilte' 和主旨 'content' 生成 'expand'。 要求内容丰富,生成至少3个自然段落。" \
@@ -132,7 +140,7 @@ def get_gpt_expand(titles,contents):
            "title,content,expand\n"
     csv = ""
     for i in range(len(titles)):
-        csv = csv + titles[i]+"," +contents[i]+"\n"
+        csv = csv + titles[i] + "," + contents[i] + "\n"
     text = text + csv
     print(text)
     return llm(text)
@@ -140,8 +148,8 @@ def get_gpt_expand(titles,contents):
 
 # test 测试
 if __name__ == '__main__':
-    text1 = get_gpt_data("直播")
-    print(text1)
+    text1 = get_gpt_data("新人直播指南")
+    # print(text1)
     # df = pd.read_csv("1.csv")
     # expand = get_gpt_expand(df["title"], df["content"])
     # print("================================================")
