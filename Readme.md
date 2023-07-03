@@ -59,7 +59,7 @@ python application.py
 > 或者 (生产模式) 需要在 类linux 环境运行以下命令
 
 ```bash
-gunicorn -b 0.0.0.0:5000 --log-level=debug wsgi:application
+gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 wsgi:application > gunicorn.log 2>&1 &
 ```
 
 > 6. 访问 http://127.0.0.1:5000
