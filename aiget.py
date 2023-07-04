@@ -75,45 +75,44 @@ def get_gpt_data(title):
            9.如果不能按照要求生成文本，请告诉我原因。
 """
     # english demo
-    # v4.5
+    # v4.5.1
     textV4 = f"""
-    Return a PPT text in csv content format. Follow the requirements below:
-                1. The content of csv is the PPT text content with the theme of ```{title}```.
-                2. This csv has 4 Columns: 'index', 'title', 'content', 'keyword'. 'index' represents the relationship between 'title'. 'index' is the rank of the title, 'title' is the content of the title, and 'content' is the body content of the title. 'keyword' is one or more key English words after the summary, use '&' to splice. The contents of 'title' and 'content' are answered in Chinese. The content of 'keyword' is answered in English.
-                3. When completing the PPT with the theme of ```{title}```, you need to generate more than 5 detailed chapters according to the theme. Each chapter has 3+ slides. You need to generate at least 3 key points based on the summary of the content of each slide, and the key points should be as detailed and specific as possible.You need to associate and expand on the key content.
-                     this is my tip for you:
-                        "index","title","content","keyword"
-                        0,"[Theme of the PPT]","[The subtitle of the PPT]","[Keywords of the topic]"
-                        1,"[Chapter 1 of PPT]","[Introduction of Chapter 1]","[Keywords of Chapter 1]"
-                        1.1,"[Title Text of Slide 1.1]","[Summary of Slide 1.1 Content]","[Keywords 1.1]"
-                        1.1.1,"[Title Text of Key 1]","[Key content: Detailed essay text about the title]","[Keyword 1]"
-                        1.1.2,"[Title Text of Key 2]","[Key content: Detailed essay text about the title]","[Keyword 2]"
-                        1.1.3,"[Title Text of Key 3]","[Key content: Detailed essay text about the title]","[Keyword 3]"            
-                        ... # Annotate the content that needs to be omitted for questioning, and the generated content cannot be used Omit
-                        1.3,"[Title Text of Slide 1.3]","[Summary of Slide 1.3 Content]","[Keywords 1.3]"
-                        1.3.1,"[Title Text of Key 1]","[Key content: Detailed essay text about the title]","[Keyword 1]"
-                        1.3.2,"[Title Text of Key 2]","[Key content: Detailed essay text about the title]","[Keyword 2]"
-                        1.3.3,"[Title Text of Key 3]","[Key content: Detailed essay text about the title]","[Keyword 3]"   
-                        ...
-                        5,"[Chapter 5 of PPT]","[Subtitle of Chapter 5]","[Keywords of Chapter 5]"
-                        5.1,"[Title Text of Slide 3]","[Summary of Slide 3 Content]","[Keyword 3]"
-                        5.1.1,"[Title Text of Key 1]","[Key content: Detailed essay text about the title]","[Keyword 1]"
-                        5.1.2,"[Title Text of Key 2]","[Key content: Detailed essay text about the title]","[Keyword 2]"
-                        5.1.4,"[Title Text of Key 3]","[Key content: Detailed essay text about the title]","[Keyword 3]"   
-                        ...
-                        5.3,"[Title Text of Slide 5.3]","[Summary of Slide 5.3 Content]","[Keywords 5.3]"
-                        5.3.1,"[Title Text of Key 1]","[Key content: Detailed essay text about the title]","[Keyword 1]"
-                        5.3.2,"[Title Text of Key 2]","[Key content: Detailed essay text about the title]","[Keyword 2]"
-                        5.3.4,"[Title Text of Key 3]","[Key content: Detailed essay text about the title]","[Keyword 3]"  
-                        ...
-                    For example,
-                        1.1.1,"Python的起源","Python是由Guido van Rossum于20世纪90年代初创建的编程语言。它的名字来自于Guido van Rossum喜欢的电视剧《Monty Python's Flying Circus》。Python的目标是成为一种简单易学、可读性强的语言。它在开源社区中得到了广泛的认可和应用，成为了Web开发、科学计算、人工智能等领域的首选语言之一。","origin"
-                4. The key content should be as detailed and specific as possible, and you need to use more than 5 sentences to describe it. If you need to change the line, use \\n instead, if you need to use ',', use ',' instead. Single-character string used to separate fields, defaults to ','.
-                5. There is no need to return anything other than the text of the csv, so that I can use the program to directly save the returned string as a CSV file correctly.
-                6. Be careful not to generate redundant ',' causing pandas.errors.ParserError.
-                7. The csv's first line must be:"index","title","content","keyword". Do not generate extra spaces.
-                8. The contents of 'title' and 'content' should be answered in Chinese. 'keyword' is one or more key English words after the summary, use '&' to splice.
-                9. If the text cannot be generated as required, please tell me the reason.
+Return a PPT text in csv content format. Follow the requirements below:
+        a. The content of csv is the PPT text content with the theme of ```{title}```.
+        b. This csv has 4 Columns: 'index', 'title', 'content', 'keyword'. 'index' represents the relationship between 'title'. 'index' is the rank of the title, 'title' is the content of the title, and 'content' is the body content of the title. 'keyword' is one or more key English words after the summary, use '&' to splice. The contents of 'title' and 'content' are answered in Chinese. The content of 'keyword' is answered in English.
+        c. When completing the PPT with the theme of ```{title}```, you need to generate more than 5 detailed chapters according to the theme. Each chapter has 3+ slides. You need to generate at least 3 subtitles based on the summary of the content of each slide, and the subtitles should be as detailed and specific as possible.You need to provide a detailed introduction based on the subheading, at least 4 sentences or more, and place the content in content.
+             this is my tip for you:
+                "index","title","content","keyword"
+                0,"[Theme of the PPT]","[The subtitle of the PPT]","[Keywords of the topic]"
+                1,"[Chapter 1 of PPT]","[Introduction of Chapter 1]","[Keywords of Chapter 1]"
+                1.1,"[Title Text of Slide 1.1]","[Summary of Slide 1.1 Content]","[Keywords 1.1]"
+                1.1.1,"[subtitle 1]","[Introduce according to the subtitle 1]","[Keyword 1]"
+                1.1.2,"[subtitle 2]","[Introduce according to the subtitle 2]","[Keyword 2]"
+                1.1.3,"[subtitle 3]","[Introduce according to the subtitle 3]","[Keyword 3]"            
+                ... # Annotate the content that needs to be omitted for questioning, and the generated content cannot be used Omit
+                1.3,"[Title Text of Slide 1.3]","[Summary of Slide 1.3 Content]","[Keywords 1.3]"
+                1.3.1,"[subtitle 1]","[Introduce according to the subtitle 1]","[Keyword 1]"
+                1.3.2,"[subtitle 2]","[Introduce according to the subtitle 2]","[Keyword 2]"
+                1.3.3,"[subtitle 3]","[Introduce according to the subtitle 3]","[Keyword 3]"   
+                ...
+                5,"[Chapter 5 of PPT]","[Subtitle of Chapter 5]","[Keywords of Chapter 5]"
+                5.1,"[Title Text of Slide 3]","[Summary of Slide 3 Content]","[Keyword 3]"
+                5.1.1,"[subtitle 1]","[Introduce according to the subtitle 1]","[Keyword 1]"
+                5.1.2,"[subtitle 2]","[Introduce according to the subtitle 2]","[Keyword 2]"
+                5.1.4,"[subtitle 3]","[Introduce according to the subtitle 3]","[Keyword 3]"   
+                ...
+                5.3,"[Title Text of Slide 5.3]","[Summary of Slide 5.3 Content]","[Keywords 5.3]"
+                5.3.1,"[subtitle 1]","[Introduce according to the subtitle 1]","[Keyword 1]"
+                5.3.2,"[subtitle 2]","[Introduce according to the subtitle 2]","[Keyword 2]"
+                5.3.4,"[subtitle 3]","[Introduce according to the subtitle 3]","[Keyword 3]"
+            For example,
+                1.1.1,"Python的起源","Python是由Guido van Rossum于20世纪90年代初创建的编程语言。它的名字来自于Guido van Rossum喜欢的电视剧《Monty Python's Flying Circus》。Python的目标是成为一种简单易学、可读性强的语言。它在开源社区中得到了广泛的认可和应用，成为了Web开发、科学计算、人工智能等领域的首选语言之一。","origin"
+        d. The key content should be as detailed and specific as possible, and you need to use more than 5 sentences to describe it. If you need to change the line, use \\n instead, if you need to use ',', use ',' instead. Single-character string used to separate fields, defaults to ','.
+        e. There is no need to return anything other than the text of the csv, so that I can use the program to directly save the returned string as a CSV file correctly.
+        f. Be careful not to generate redundant ',' causing pandas.errors.ParserError.
+        g. The csv's first line must be:"index","title","content","keyword". Do not generate extra spaces.
+        h. The contents of 'title' and 'content' should be answered in Chinese. 'keyword' is one or more key English words after the summary, use '&' to splice.
+        i. If the text cannot be generated as required, please tell me the reason.
 """
     # text1 = llm(textV4)
     # 非流式传输
@@ -140,7 +139,7 @@ def get_gpt_expand(titles, contents):
 
 # test 测试
 if __name__ == '__main__':
-    text1 = get_gpt_data("新人直播指南")
+    text1 = get_gpt_data("述职报告")
     # print(text1)
     # df = pd.read_csv("1.csv")
     # expand = get_gpt_expand(df["title"], df["content"])
