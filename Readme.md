@@ -6,7 +6,7 @@
 
 ## 项目介绍
 
-> 通过 gpt-3.5-turbo 和 pptx 生成 指定主题的PPTX文件
+> 通过 gpt-3.5-turbo 和 pptx 生成 指定主题的PPTX文件。 \
 > 这是通过项目生成的未经修改的样例
 > ![img.png](img.png)
 
@@ -76,8 +76,11 @@ gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 wsgi:application > gunico
 | 优化生成速度 | 已经优化服务启动方式 | openaiapi接口太慢 |
 
 ## Star History
+<br>
 
 [![Star History Chart](https://api.star-history.com/svg?repos=limaoyi1/Auto_PPT&type=Timeline)](https://star-history.com/#limaoyi1/Auto_PPT&Timeline)
+
+</br>
 
 ## Blog 链接
 
