@@ -33,6 +33,12 @@
                 url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
             }
         }
+        canvas{
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+        /*** 动画 end****/
 
 
         body {
@@ -118,7 +124,9 @@
 
 </head>
 <body>
+<script src="./../static/particle.min.js"></script>
 <div class="container">
+    <canvas id="my_canvas"></canvas>
     <a class="github-icon" href="https://github.com/limaoyi1/Auto_PPT">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30" height="30">
             <path fill="#000"
@@ -139,6 +147,9 @@
 </div>
 
 <script>
+    // 初始化粒子（画布id）
+    particle.init('my_canvas');
+    // 调用api
     function callAPI() {
         let title = document.getElementById("titleInput").value;
         let url = "http://www.limaoyi.top:5000/ppt?title=" + encodeURIComponent(title);
