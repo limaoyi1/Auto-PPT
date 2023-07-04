@@ -4,11 +4,69 @@
     <title>Auto PPT</title>
     <meta charset="UTF-8">
     <link rel="icon" href="https://img1.imgtp.com/2023/06/26/2uA6lVi8.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+    <meta property="image" content="https://img1.imgtp.com/2023/06/26/2uA6lVi8.png"/>
+    <meta property="title" content="Auto PPTX: chatgpt自动生成pptx"/>
+    <meta
+      name="description"
+      content="Auto generate pptx using gpt-3.5, Free to use online | 通过gpt-3.5生成PPT,免费在线使用"
+    />
     <style>
+        /* 动画 */
+        .fade-in {
+            opacity: 0; /* 先将元素透明度设为0 */
+            animation: fadeIn ease-in 1; /* 设置动画 */
+            animation-fill-mode: forwards; /* 保持结束后状态 */
+            animation-duration: 1s; /* 动画时长为1秒 */
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        /* 淡出动画 */
+        .fade-out {
+            opacity: 1; /* 先将元素透明度设为1 */
+            animation: fadeOut ease-in 1; /* 设置动画 */
+            animation-fill-mode: forwards; /* 保持结束后状态 */
+            animation-duration: 1s; /* 动画时长为1秒 */
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        /**背景图变色动画**/
+        @keyframes background-overlay-animation {
+            0% {
+                background-image: linear-gradient(4deg, rgba(255, 78, 36, 0.3) 50%, rgba(255, 78, 36, 0.3) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+            25% {
+                background-image: linear-gradient(4deg, rgba(213, 49, 127, 0.3) 50%, rgba(213, 49, 127, 0.3) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+            50% {
+                background-image: linear-gradient(4deg, rgba(36, 182, 255, 0.3) 50%, rgba(36, 182, 255, 1) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+
+            100% {
+                background-image: linear-gradient(4deg, rgba(0, 255, 254, 0.3) 50%, rgba(0, 255, 254, 0.3) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+        }
+
+
         body {
             margin: 0;
         }
-
 
         /* 页面容器 */
         .container {
@@ -21,6 +79,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
+            animation: background-overlay-animation 10s linear infinite;
         }
 
         /* 内容样式 */
@@ -35,8 +95,9 @@
             color: rgba(58, 209, 73, 0.6);
             text-align: center;
             font-size: 48px; /* 调整标题字体大小 */
-            font-weight: bold;
+            font-weight: 500;
             margin-top: -20px; /* 调整标题与上方元素的间距 */
+            font-family: "Microsoft YaHei UI";
         }
 
         /* 输入行样式 */
@@ -94,7 +155,7 @@
         </svg>
     </a>
     <div class="content">
-        <h1 class="page-title">自动生成你的PPT</h1>
+        <h1 class="page-title fade-in">自动生成你的PPT</h1>
 
         <div class="input-row">
             <input type="text" id="titleInput" class="page-input" placeholder="请输入PPT的主题"/>
