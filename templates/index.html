@@ -13,25 +13,20 @@
     />
     <style>
         /* 动画 */
-        /* 淡入动画*/
         .fade-in {
             opacity: 0; /* 先将元素透明度设为0 */
             animation: fadeIn ease-in 1; /* 设置动画 */
             animation-fill-mode: forwards; /* 保持结束后状态 */
             animation-duration: 1s; /* 动画时长为1秒 */
         }
-
         @keyframes fadeIn {
             0% {
                 opacity: 0;
             }
-            /* 元素从透明度0开始 */
             100% {
                 opacity: 1;
             }
-            /* 元素透明度变为1，即完全显示 */
         }
-
         /* 淡出动画 */
         .fade-out {
             opacity: 1; /* 先将元素透明度设为1 */
@@ -39,17 +34,35 @@
             animation-fill-mode: forwards; /* 保持结束后状态 */
             animation-duration: 1s; /* 动画时长为1秒 */
         }
-
         @keyframes fadeOut {
             0% {
                 opacity: 1;
             }
-            /* 元素透明度为1，即完全显示 */
             100% {
                 opacity: 0;
             }
-            /* 元素透明度变为0，即完全消失 */
         }
+        /**背景图变色动画**/
+        @keyframes background-overlay-animation {
+            0% {
+                background-image: linear-gradient(4deg, rgba(255, 78, 36, 0.3) 50%, rgba(255, 78, 36, 0.3) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+            25% {
+                background-image: linear-gradient(4deg, rgba(213, 49, 127, 0.3) 50%, rgba(213, 49, 127, 0.3) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+            50% {
+                background-image: linear-gradient(4deg, rgba(36, 182, 255, 0.3) 50%, rgba(36, 182, 255, 1) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+
+            100% {
+                background-image: linear-gradient(4deg, rgba(0, 255, 254, 0.3) 50%, rgba(0, 255, 254, 0.3) 100%),
+                url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
+            }
+        }
+
 
         body {
             margin: 0;
@@ -67,7 +80,7 @@
             align-items: center;
             justify-content: center;
 
-            animation: fadeIn 3s linear;
+            animation: background-overlay-animation 10s linear infinite;
         }
 
         /* 内容样式 */
