@@ -276,9 +276,9 @@ if __name__ == '__main__':
     print("调试模式： 1.节流模式（调用旧数据） \n"
           "2.仿真模式（请求openai-api）")
     mode = input("请输入您的模式：")
-    df = pd.read_csv("1.csv")
+    df = pd.read_csv("./pptx/1.csv")
     if mode == "1":
-        df = pd.read_csv("1.csv")
+        df = pd.read_csv("./pptx/1.csv")
     elif mode == "2":
         name = input("请输入您的主题：")
         data = get_gpt_data(name)

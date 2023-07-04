@@ -79,7 +79,7 @@ def make_page_left(presentation, theme, numbers, titles, texts, keywords, index)
                 height = (len("\t" + texts[subtitle_by_index[idx]]) / (4.8 / 0.15) + 1) * 0.16 + 0.1
                 text_box_common2 = group_shape.shapes.add_textbox(Inches(0.7), Inches(1.1 + offset), Inches(4.8),
                                                                   Inches(height))
-                offset = height + offset
+                offset = height + offset + 0.15
                 text_frame_common2 = text_box_common2.text_frame
                 text_frame_common2.paragraphs[0].text = str("\t" + texts[subtitle_by_index[idx]])
                 text_frame_common2.paragraphs[0].font.name = "微软雅黑"
@@ -196,7 +196,7 @@ def make_page_right(presentation, theme, numbers, titles, texts, keywords, index
                 height = (len("\t" + texts[subtitle_by_index[idx]]) / (4.8 / 0.15) + 1) * 0.16 + 0.1
                 text_box_common2 = group_shape.shapes.add_textbox(Inches(4.6), Inches(1.1 + offset), Inches(4.8),
                                                                   Inches(height))
-                offset = height + offset
+                offset = height + offset + 0.15
                 # 设置文本框自适应
                 text_frame_common2 = text_box_common2.text_frame
                 text_frame_common2.paragraphs[0].text = str("\t" + texts[subtitle_by_index[idx]])
