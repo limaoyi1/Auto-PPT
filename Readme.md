@@ -1,4 +1,4 @@
-# Auto_PPT 自动生成你的PPT
+# <p align="center">Auto_PPT 自动生成你的PPT</p>
 
 <p align="center"><i>你是否厌倦了花费无尽的时间来制作乏味的演示文稿？是否希望有一个魔法工具，能够在几秒钟内为你生成令人惊叹的PPT？别担心，我们为你带来了Auto_PPT！</i></p>
 
