@@ -44,7 +44,7 @@
 
 > ⏱️ Get a professionally designed PPT in just 2-3 minutes. The generation time depends on the speed of the OpenAI interface, ensuring efficient and reliable operations.
 
-> 🔗 Start your trial now: Click the trial link to explore the magic of Auto_PPT together! Please note that, to maintain limited server traffic, we currently do not provide random image services. The program will use a few random images to generate the slides.
+> 🔗 Start your trial now: Click the trial [link](http://www.limaoyi.top:5000/) to explore the magic of Auto_PPT together! Please note that, to maintain limited server traffic, we currently do not provide random image services. The program will use a few random images to generate the slides.
 
 ## 🧲 Project Advantages
 
