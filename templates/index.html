@@ -4,7 +4,53 @@
     <title>Auto PPT</title>
     <meta charset="UTF-8">
     <link rel="icon" href="https://img1.imgtp.com/2023/06/26/2uA6lVi8.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+    <meta property="image" content="https://img1.imgtp.com/2023/06/26/2uA6lVi8.png"/>
+    <meta property="title" content="Auto PPTX: chatgpt自动生成pptx"/>
+    <meta
+      name="description"
+      content="Auto generate pptx using gpt-3.5, Free to use online | 通过gpt-3.5生成PPT,免费在线使用"
+    />
     <style>
+        /* 动画 */
+        /* 淡入动画*/
+        .fade-in {
+            opacity: 0; /* 先将元素透明度设为0 */
+            animation: fadeIn ease-in 1; /* 设置动画 */
+            animation-fill-mode: forwards; /* 保持结束后状态 */
+            animation-duration: 1s; /* 动画时长为1秒 */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            /* 元素从透明度0开始 */
+            100% {
+                opacity: 1;
+            }
+            /* 元素透明度变为1，即完全显示 */
+        }
+
+        /* 淡出动画 */
+        .fade-out {
+            opacity: 1; /* 先将元素透明度设为1 */
+            animation: fadeOut ease-in 1; /* 设置动画 */
+            animation-fill-mode: forwards; /* 保持结束后状态 */
+            animation-duration: 1s; /* 动画时长为1秒 */
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            /* 元素透明度为1，即完全显示 */
+            100% {
+                opacity: 0;
+            }
+            /* 元素透明度变为0，即完全消失 */
+        }
+
         body {
             margin: 0;
         }
@@ -20,6 +66,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
+            animation: fadeIn 3s linear;
         }
 
         /* 内容样式 */
@@ -34,8 +82,9 @@
             color: rgba(58, 209, 73, 0.6);
             text-align: center;
             font-size: 48px; /* 调整标题字体大小 */
-            font-weight: bold;
+            font-weight: 500;
             margin-top: -20px; /* 调整标题与上方元素的间距 */
+            font-family: "Microsoft YaHei UI";
         }
 
         /* 输入行样式 */
@@ -89,11 +138,12 @@
     <a class="github-icon" href="https://github.com/limaoyi1/Auto_PPT">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30" height="30">
             <path fill="#FFF"
-                  d="M23.999 2C12.177 2 2 12.179 2 24.001c0 9.086 5.891 16.767 14.06 19.438 1.03.189 1.407-.447 1.407-1.002v-3.91c-5.715 1.23-6.915-2.749-6.915-2.749-.935-2.353-2.283-2.979-2.283-2.979-1.874-1.278.146-1.252.146-1.252 2.071.148 3.154 2.124 3.154 2.124 1.839 3.18 4.828 2.261 5.998 1.728.186-1.327.715-2.26 1.301-2.779-4.552-.514-9.365-2.276-9.365-10.126 0-2.242.8-4.077 2.12-5.502-.212-.515-.918-2.61.201-5.439 0 0 1.72-.553 5.639 2.107a19.293 19.293 0 0 1 5.007-.67c1.7.005 3.41.228 5.006.67 3.916-2.66 5.634-2.107 5.634-2.107 1.12 2.83.416 4.924.204 5.439 1.322 1.425 2.116 3.26 2.116 5.502 0 7.865-4.82 9.604-9.39 10.11.736.63 1.397 1.876 1.397 3.777v5.583c0 .557.373 1.198 1.417.994C40.106 40.767 46 33.086 46 24.001 46 12.179 35.823 2 23.999 2"/>
+                  d="M23.999 2C12.177 2 2 12.179 2 24.001c0 9.086 5.891 16.767 14.06 19.438 1.03.189 1.407-.447 1.407-1.002v-3.91c-5.715 1.23-6.915-2.749-6.915-2.749-.935-2.353-2.283-2.979-2.283-2.979-1.874-1.278.146-1.252.146-1.252 2.071.148 3.154 2.124 3.154 2.124 1.839 3.18 4.828 2.261 5.998 1.728.186-1.327.715-2.26 1.301-2.779-4.552-.514-9.365-2.276-9.365-10.126 0-2.242.8-4.077 2.12-5.502-.212-.515-.918-2.61.201-5.439 0 0 1.72-.553 5.639 2.107a19.293 19.293 0 0 1 5.007-.67c1.7.005 3.41.228 5.006.67 3.916-2.66 5.634-2.107 5.634-2.107 1.12 2.83.416 4.924.204 5.439 1.322 1.425 2.116 3.26 2.116 5.502 0 7.865-4.82 9.604-9.39 10.11.736.63 1.397 1.876 1.397 3.777v5.583c0 .557.373 1.198 1.417.994C40.106 40.767 46 33.086 46 24.001 46 12.179 35.823 2 23.999 2">
+            </path>
         </svg>
     </a>
     <div class="content">
-        <h1 class="page-title">自动生成你的PPT</h1>
+        <h1 class="page-title fade-in">自动生成你的PPT</h1>
 
         <div class="input-row">
             <input type="text" id="titleInput" class="page-input" placeholder="请输入PPT的主题"/>
