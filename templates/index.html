@@ -4,6 +4,7 @@
     <title>Auto PPT</title>
     <meta charset="UTF-8">
     <link rel="icon" href="https://img1.imgtp.com/2023/06/26/2uA6lVi8.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
     <meta property="image" content="https://img1.imgtp.com/2023/06/26/2uA6lVi8.png"/>
     <meta property="title" content="Auto PPTX: chatgpt自动生成pptx"/>
@@ -12,36 +13,6 @@
       content="Auto generate pptx using gpt-3.5, Free to use online | 通过gpt-3.5生成PPT,免费在线使用"
     />
     <style>
-        /* 动画 */
-        .fade-in {
-            opacity: 0; /* 先将元素透明度设为0 */
-            animation: fadeIn ease-in 1; /* 设置动画 */
-            animation-fill-mode: forwards; /* 保持结束后状态 */
-            animation-duration: 1s; /* 动画时长为1秒 */
-        }
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        /* 淡出动画 */
-        .fade-out {
-            opacity: 1; /* 先将元素透明度设为1 */
-            animation: fadeOut ease-in 1; /* 设置动画 */
-            animation-fill-mode: forwards; /* 保持结束后状态 */
-            animation-duration: 1s; /* 动画时长为1秒 */
-        }
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
         /**背景图变色动画**/
         @keyframes background-overlay-animation {
             0% {
@@ -62,6 +33,12 @@
                 url("https://img1.imgtp.com/2023/07/04/sOFsVAlW.jpg");
             }
         }
+        canvas{
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+        /*** 动画 end****/
 
 
         body {
@@ -147,7 +124,9 @@
 
 </head>
 <body>
+<script src="./../static/particle.min.js"></script>
 <div class="container">
+    <canvas id="my_canvas"></canvas>
     <a class="github-icon" href="https://github.com/limaoyi1/Auto_PPT">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30" height="30">
             <path fill="#000"
@@ -155,11 +134,11 @@
         </svg>
     </a>
     <div class="content">
-        <h1 class="page-title fade-in">自动生成你的PPT</h1>
+        <h1 class="page-title animate__animated animate__zoomInDown">自动生成你的PPT</h1>
 
         <div class="input-row">
-            <input type="text" id="titleInput" class="page-input" placeholder="请输入PPT的主题"/>
-            <button onclick="callAPI()" class="page-btn">生成</button>
+            <input type="text" id="titleInput" class="page-input animate__animated animate__backInLeft" placeholder="请输入PPT的主题"/>
+            <button onclick="callAPI()" class="page-btn animate__animated animate__backInRight">生成</button>
         </div>
         <div class="input-row">
             <p id="loadingText" style="display: none;">正在生成 PPT，这大概需要3~5分钟，请稍候...</p>
@@ -168,6 +147,9 @@
 </div>
 
 <script>
+    // 初始化粒子（画布id）
+    particle.init('my_canvas');
+    // 调用api
     function callAPI() {
         let title = document.getElementById("titleInput").value;
         let url = "http://www.limaoyi.top:5000/ppt?title=" + encodeURIComponent(title);
