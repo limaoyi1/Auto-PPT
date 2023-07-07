@@ -32,7 +32,7 @@ def get_random_api_key():
 
 base_path = "./picture"
 
-bg_base_path = "./pptx/static/bg"
+bg_base_path = "pptx_static/static/bg"
 
 import requests
 

@@ -3,13 +3,13 @@ import os
 import re
 from io import StringIO, BytesIO
 
+import pptx
 import pandas as pd
 import datetime
 from pptx.util import Pt, Inches, Inches
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE_TYPE, MSO_SHAPE
 from pptx.enum.text import MSO_AUTO_SIZE, MSO_ANCHOR, MSO_VERTICAL_ANCHOR, PP_PARAGRAPH_ALIGNMENT, PP_ALIGN
-
 from aiget import get_gpt_data
 from makepage import make_page_left, make_page_right, get_subtitle_by_index, make_page_cv
 from picture import search, check_same_name_file, get_random_file, get_random_theme
@@ -276,9 +276,9 @@ if __name__ == '__main__':
     print("调试模式： 1.节流模式（调用旧数据） \n"
           "2.仿真模式（请求openai-api）")
     mode = input("请输入您的模式：")
-    df = pd.read_csv("./pptx/1.csv")
+    df = pd.read_csv("pptx_static/1.csv")
     if mode == "1":
-        df = pd.read_csv("./pptx/1.csv")
+        df = pd.read_csv("pptx_static/1.csv")
     elif mode == "2":
         name = input("请输入您的主题：")
         data = get_gpt_data(name)
@@ -322,7 +322,7 @@ if __name__ == '__main__':
             make_page_right(prs, theme, df["index"], df["title"], df["content"], df["keyword"], level2[i])
 
     now = datetime.datetime.now().timestamp()
-    path = './myppt/test' + str(now) + '.pptx'
+    path = './myppt/test' + str(now) + '.pptx_static'
     if not os.path.exists('./myppt'):
         os.makedirs('./myppt')
     prs.save(path)

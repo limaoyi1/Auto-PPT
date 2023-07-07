@@ -70,7 +70,7 @@ def draw_rectangles(image_path, regions):
 
 
 if __name__ == '__main__':
-    image_path = "./pptx/static/bg/pencil/1_191224140551_1-1.jpg"
+    image_path = "pptx_static/static/bg/pencil/1_191224140551_1-1.jpg"
     largest_white_region = get_largest_white_region(image_path)
     box_x, box_y, box_w, box_h = get_largest_white_region_in_slide(image_path)
     print(box_x, box_y, box_w, box_h)

@@ -21,7 +21,7 @@ def stream():
     ppt = make_ppt(title)
 
     response = make_response(ppt)
-    response.headers['Content-Disposition'] = 'attachment; filename=file.pptx'
+    response.headers['Content-Disposition'] = 'attachment; filename=file.pptx_static'
     return response
 
 

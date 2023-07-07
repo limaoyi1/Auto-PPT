@@ -32,7 +32,7 @@
 
 > 使用 gpt-3.5-turbo 和 pptx，轻松生成指定主题的PPTX文件。 \
 > 以下是通过项目生成的原始示例，未经任何修改：
-> ![img.png](./pptx/static/img.png)
+> ![img.png](pptx_static/static/img.png)
 
 ## ⭐ 感谢支持
 
