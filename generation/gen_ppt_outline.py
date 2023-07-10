@@ -1,3 +1,5 @@
+import uuid
+
 from readconfig.myconfig import MyConfig
 from chain.gpt_memory import GptChain
 
@@ -30,9 +32,10 @@ class GenOutline(Gen):
         super().__init__(session_id)
 
     def predict_outline(self, query):
-        text = f"""我选择的标题是```{query}```,我希望你用markdown的格式生成一个的大纲,并且请遵循以下要求:
+        text = f"""我选择的标题是第```{query}```个标题,我希望你用markdown的格式生成一个只有标题的大纲,并且请遵循以下要求:
         1.如果要创建标题，请在单词或短语前面添加井号 (#) 。# 的数量代表了标题的级别。
-        2.如果需要创建无序列表，请在单词或短语前面添加井号 (#),# 的数量的数量是上一级标题的# 的数量加1
+        2.不能使用无序或者有序列表,必须全部使用添加井号 (#)的方式表示大纲结构.
+        3.第一级(#)表示大纲的标题,第二级(##)表示章节的标题,第三级(###)表示章节的重点.
         """
         self.GptChain.predict(text)
 
@@ -45,26 +48,26 @@ class GenBody(Gen):
         if fix_outline == "":
             text = f"""请根据大纲生成的PPT文本的正文内容,我希望你同样以markdown的格式返回,并且请遵循以下要求:
             1.不要丢失原有的大纲markdown信息
-            2.新增的正文内容使用<p></p> 标签包围
+            2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围
             """
         else:
             text = f"""我对大纲进行了如下修改,这是修改后的大纲:
             ```{fix_outline}``` 
             请根据大纲生成的PPT文本的正文内容,我希望你同样以markdown的格式返回,并且请遵循以下要求:
             1.不要丢失原有的大纲markdown信息
-            2.新增的正文内容使用<p></p> 标签包围
+            2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围
             """
         self.GptChain.predict(text)
 
 
 if __name__ == '__main__':
-    session_id = "1555211"
+    session_id = str(uuid.uuid4())
 
     title = GenTitle(session_id)
-    title.predict_title("如何写好一篇文章?")
+    title.predict_title("如何健身")
 
     outline = GenOutline(session_id)
-    outline.predict_outline("写好文章 - 将你的话语变成文字")
+    outline.predict_outline("1")
 
     body = GenBody(session_id)
     body.predict_body("")

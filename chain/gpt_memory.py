@@ -36,7 +36,7 @@ class GptChain:
         prompt = PromptTemplate(
             input_variables=["chat_history", "human_input"], template=self.template)
         llm_chain = LLMChain(
-            llm=OpenAI(openai_api_key=self.openai_api_key,streaming =True, callbacks=[StreamingStdOutCallbackHandler()]),
+            llm=OpenAI(model_name="gpt-3.5-turbo-16k", openai_api_key=self.openai_api_key,streaming =True, callbacks=[StreamingStdOutCallbackHandler()]),
             prompt=prompt,
             verbose=True,
             memory=memory,
