@@ -60,16 +60,35 @@ class GenBody(Gen):
         self.GptChain.predict(text)
 
 
+class GenCsv(Gen):
+    def __init__(self, session_id):
+        super().__init__(session_id)
+
+    def predict_csv(self):
+        text = f"""我希望你帮助我将markdown整理为csv文本方便我总结保存。并且遵循以下的要求：
+           1.这份csv有4个Column：'index','title','content','keyword'。'index'表示'title'之间的关系。'index'是标题的等级，'title'是标题的内容，'content'是该标题的正文内容。'keyword'是总结后的一个或者多个关键英语单词,使用'&'进行拼接。'title','content'的内容使用中文回答。'keyword'的内容用英文回答。
+                例如：
+                    "index","title","content","keyword"
+                    1,"[大纲的标题]","","[keyword]"
+                    1.1,"[章节的标题]","","[keyword]"
+                    1.1.1,"[章节的重点]","[正文内容]","[keyword]"
+        """
+        self.GptChain.predict(text)
+
+
 if __name__ == '__main__':
     session_id = str(uuid.uuid4())
 
     title = GenTitle(session_id)
-    title.predict_title("如何健身")
+    title.predict_title("如何学习骑自行车")
 
     outline = GenOutline(session_id)
     outline.predict_outline("1")
 
     body = GenBody(session_id)
     body.predict_body("")
+
+    csv = GenCsv(session_id)
+    csv.predict_csv()
 
 # 将一个问题拆分成多个子问题解决,可以大大提高AI对问题的理解,从而提高程序的速度和准确性
