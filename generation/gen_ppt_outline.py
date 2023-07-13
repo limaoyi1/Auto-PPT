@@ -1,5 +1,6 @@
 import uuid
 
+from mdtree.tree2ppt import Tree2PPT
 from readconfig.myconfig import MyConfig
 from chain.gpt_memory import GptChain
 
@@ -24,7 +25,7 @@ class GenTitle(Gen):
     def predict_title(self, query):
         text = f"""我希望你帮助我以```{query}```为题生成3个PPT的标题.要求能吸引人的注意.
         """
-        self.GptChain.predict(text)
+        return self.GptChain.predict(text)
 
 
 class GenOutline(Gen):
@@ -37,7 +38,7 @@ class GenOutline(Gen):
         2.不能使用无序或者有序列表,必须全部使用添加井号 (#)的方式表示大纲结构.
         3.第一级(#)表示大纲的标题,第二级(##)表示章节的标题,第三级(###)表示章节的重点.
         """
-        self.GptChain.predict(text)
+        return self.GptChain.predict(text)
 
 
 class GenBody(Gen):
@@ -59,7 +60,7 @@ class GenBody(Gen):
             2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围;
             3.Markdown的文本需要使用 ``` 包围;
             """
-        self.GptChain.predict(text)
+        return self.GptChain.predict(text)
 
 
 class GenCsv(Gen):
@@ -82,14 +83,15 @@ if __name__ == '__main__':
     session_id = str(uuid.uuid4())
 
     title = GenTitle(session_id)
-    title.predict_title("如何学习python")
+    title.predict_title("如何学习java")
 
     outline = GenOutline(session_id)
     outline.predict_outline("1")
 
     body = GenBody(session_id)
-    body.predict_body("")
+    md = body.predict_body("")
 
+    Tree2PPT(md)
     # csv = GenCsv(session_id)
     # csv.predict_csv()
 
