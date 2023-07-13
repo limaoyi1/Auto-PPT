@@ -48,7 +48,8 @@ class GenBody(Gen):
         if fix_outline == "":
             text = f"""请根据大纲生成的PPT文本的正文内容,我希望你同样以markdown的格式返回,并且请遵循以下要求:
             1.不要丢失原有的大纲markdown信息和格式;
-            2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围;
+            2.你需要根据每一个标题的信息,结合上下文在标题的下一行扩写新增一个或者多个段落,每个段落必须使用<p></p>标签包围;
+            3.Markdown的文本需要使用 ``` 包围;
             """
         else:
             text = f"""我对大纲进行了如下修改,这是修改后的大纲:
@@ -56,6 +57,7 @@ class GenBody(Gen):
             请根据大纲生成的PPT文本的正文内容,我希望你同样以markdown的格式返回,并且请遵循以下要求:
             1.不要丢失原有的大纲markdown信息和格式;
             2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围;
+            3.Markdown的文本需要使用 ``` 包围;
             """
         self.GptChain.predict(text)
 
@@ -80,7 +82,7 @@ if __name__ == '__main__':
     session_id = str(uuid.uuid4())
 
     title = GenTitle(session_id)
-    title.predict_title("如何学习骑自行车")
+    title.predict_title("如何学习python")
 
     outline = GenOutline(session_id)
     outline.predict_outline("1")

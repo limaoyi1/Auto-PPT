@@ -1,13 +1,7 @@
 import unittest
 
 from mdtree.parser import parse_string
-
-
-def read_md_file(file_path, encoding='utf-8'):
-    with open(file_path, 'r', encoding=encoding) as file:
-        content = file.read()
-    return content
-
+from mdtree.utils import read_md_file
 
 md_content = read_md_file("./txt.md")
 out = parse_string(md_content)

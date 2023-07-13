@@ -2,11 +2,11 @@ from flask import Flask, request, make_response, render_template
 
 from saveppt import make_ppt
 
-from flask_cors import CORS
+# from flask_cors import CORS
 
 app = Flask(__name__)
 # 允许跨域
-CORS(app)
+# CORS(app)
 
 
 @app.route('/')
