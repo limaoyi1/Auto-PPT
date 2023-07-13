@@ -22,7 +22,7 @@ class GenTitle(Gen):
         super().__init__(session_id)
 
     def predict_title(self, query):
-        text = f"""我希望你帮助我以```{query}```为题生成3个PPT的标题.要求能吸引人的注意
+        text = f"""我希望你帮助我以```{query}```为题生成3个PPT的标题.要求能吸引人的注意.
         """
         self.GptChain.predict(text)
 
@@ -47,15 +47,15 @@ class GenBody(Gen):
     def predict_body(self, fix_outline):
         if fix_outline == "":
             text = f"""请根据大纲生成的PPT文本的正文内容,我希望你同样以markdown的格式返回,并且请遵循以下要求:
-            1.不要丢失原有的大纲markdown信息
-            2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围
+            1.不要丢失原有的大纲markdown信息和格式;
+            2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围;
             """
         else:
             text = f"""我对大纲进行了如下修改,这是修改后的大纲:
             ```{fix_outline}``` 
             请根据大纲生成的PPT文本的正文内容,我希望你同样以markdown的格式返回,并且请遵循以下要求:
-            1.不要丢失原有的大纲markdown信息
-            2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围
+            1.不要丢失原有的大纲markdown信息和格式;
+            2.你需要根据每一个标题的信息,结合上下文在标题的下一行新增一个或者多个段落,每个段落必须使用<p></p>标签包围;
             """
         self.GptChain.predict(text)
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     body = GenBody(session_id)
     body.predict_body("")
 
-    csv = GenCsv(session_id)
-    csv.predict_csv()
+    # csv = GenCsv(session_id)
+    # csv.predict_csv()
 
 # 将一个问题拆分成多个子问题解决,可以大大提高AI对问题的理解,从而提高程序的速度和准确性

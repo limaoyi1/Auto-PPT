@@ -28,7 +28,7 @@
 
 > please visit [English Guide](./Readme.en.md)
 
-## 🎞️ 项目介绍
+## 🎞️ 项目介绍 
 
 > 使用 gpt-3.5-turbo 和 pptx，轻松生成指定主题的PPTX文件。 \
 > 以下是通过项目生成的原始示例，未经任何修改：
