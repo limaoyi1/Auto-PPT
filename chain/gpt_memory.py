@@ -44,8 +44,7 @@ class GptChain:
         self.llm_chain = llm_chain
 
     def predict(self, question):
-        resp = self.llm_chain.predict(human_input=question)
-        return resp
+        return self.llm_chain.predict(human_input=question)
 
     def clear_redis(self):
         self.message_history.clear()

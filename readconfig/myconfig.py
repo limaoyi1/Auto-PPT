@@ -31,7 +31,7 @@ class MyConfig:
             self.UNSPLASH_ENABLE = config.get('Credentials', 'UNSPLASH_ENABLE')
             self.REDIS_ENABLE = config.get('Credentials', 'REDIS_ENABLE')
             self.REDIS_URL = config.get('Credentials', 'REDIS_URL')
-
+        print(self.OPENAI_API_KEY)
 
 if __name__ == '__main__':
     my_config = MyConfig()

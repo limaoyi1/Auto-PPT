@@ -1,6 +1,7 @@
 import datetime
 import os
 from enum import Enum
+from io import BytesIO
 
 from PIL.ImageQt import rgb
 from pptx import Presentation
@@ -53,10 +54,15 @@ class Tree2PPT:
             MD2Slide(self.prs, self.theme, heading.text, content=heading.source)
 
         # self.make_slide_demo(self.prs, heading.text, heading.source)
-        MD2Slide(self.prs, self.theme, heading.text, content=heading.source)
         if heading.children is not []:
             for child in heading.children:
                 self.traverse_tree(child)
+
+    def save_stream(self):
+        stream = BytesIO()
+        self.prs.save(stream)
+        stream.seek(0)  # Reset the stream position to the beginning
+        return stream
 
 
 class MarkdownCategory:
