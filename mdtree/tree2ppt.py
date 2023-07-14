@@ -44,14 +44,16 @@ class Tree2PPT:
         self.tree = self.out.main
 
     def traverse_tree(self, heading):
-        if heading.source is None or heading.source == '':
+        if heading is not None and (heading.source is None or heading.source == ''):
             content = ""
             if heading.children is not []:
                 for child in heading.children:
                     content = content + child.text + "\n"
             MD2Slide(self.prs, self.theme, heading.text, content=content)
-        else:
+        elif heading is not None:
             MD2Slide(self.prs, self.theme, heading.text, content=heading.source)
+        else:
+            return
 
         # self.make_slide_demo(self.prs, heading.text, heading.source)
         if heading.children is not []:

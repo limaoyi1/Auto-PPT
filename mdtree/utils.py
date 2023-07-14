@@ -1,6 +1,6 @@
 import os
 import random
-bg_base_path = "./../pptx_static/static/bg"
+bg_base_path = "./pptx_static/static/bg"
 
 
 def get_random_theme():

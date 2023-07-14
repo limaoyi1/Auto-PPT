@@ -85,19 +85,16 @@ pip install -r requirements.txt
 > 4. 在 config.ini 添加你的api key
 
 > 5. 运行项目
-```bash
-cd ./flaskapp/
-```
 
 > 运行
 ```bash
-python application.py
+python app.py
 ```
 
 > 或者 (生产模式) 需要在 类linux 环境运行以下命令
 
 ```bash
-gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 wsgi:application > gunicorn.log 2>&1 &
+gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicorn.log 2>&1 &
 ```
 
 > 6. 访问 http://127.0.0.1:5000
