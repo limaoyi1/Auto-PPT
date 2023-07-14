@@ -1,16 +1,11 @@
-import datetime
-import os
 import warnings
 
-import pandas as pd
 from pptx.dml.color import RGBColor
 from pptx.enum.text import MSO_AUTO_SIZE, MSO_VERTICAL_ANCHOR
-from pptx.oxml.ns import qn
 from pptx.util import Pt, Inches
 
 from cv import get_largest_white_region_in_slide
-from picture import search, check_same_name_file, get_random_file, get_random_theme, get_image_resolution
-from pptx import Presentation
+from picture import search, check_same_name_file, get_random_file, get_image_resolution
 
 warnings.filterwarnings('ignore')
 
@@ -101,12 +96,12 @@ def make_page_left(presentation, theme, numbers, titles, texts, keywords, index)
             link = "./picture" + "/" + str(keywords_index_) + ".jpg"
         else:
             link = search(str(keywords_index_))
-        width1, height1= get_image_resolution(link)
+        width1, height1 = get_image_resolution(link)
         left = Inches(5.5)  # 图片左侧距离幻灯片左边缘的距离
         top = Inches(1.2)  # 图片顶部距离幻灯片上边缘的距离
         width = Inches(4)  # 图片的宽度
 
-        height = width * (height1 / width1) # 图片的高度
+        height = width * (height1 / width1)  # 图片的高度
         ph_picture = slide.shapes.add_picture(link, left, top, width, height)
 
 
@@ -219,13 +214,14 @@ def make_page_right(presentation, theme, numbers, titles, texts, keywords, index
             link = "./picture" + "/" + str(keywords_index_) + ".jpg"
         else:
             link = search(str(keywords_index_))
-        width1, height1= get_image_resolution(link)
+        width1, height1 = get_image_resolution(link)
         left = Inches(0.5)  # 图片左侧距离幻灯片左边缘的距离
         top = Inches(1.2)  # 图片顶部距离幻灯片上边缘的距离
         width = Inches(4)  # 图片的宽度
 
-        height = width * (height1 / width1) # 图片的高度
+        height = width * (height1 / width1)  # 图片的高度
         ph_picture = slide.shapes.add_picture(link, left, top, width, height)
+
 
 def get_subtitle_by_index(numbers, index):
     numbers_index_ = numbers[index]
@@ -235,6 +231,7 @@ def get_subtitle_by_index(numbers, index):
             subtitle_index.append(idx)
     return subtitle_index
 
+
 def make_page_cv(presentation, theme, numbers, titles, texts, keywords, index):
     slide = presentation.slides.add_slide(presentation.slide_layouts[8])
     # 1、新增母版占位符
@@ -242,7 +239,7 @@ def make_page_cv(presentation, theme, numbers, titles, texts, keywords, index):
     path = get_random_file(theme)
     # 通过 cv 获取 box 信息
     box_x, box_y, box_w, box_h = get_largest_white_region_in_slide(path)
-    if get_largest_white_region_in_slide(path) == None or box_w <1:
+    if get_largest_white_region_in_slide(path) == None or box_w < 1:
         make_page_right(presentation, theme, numbers, titles, texts, keywords, index)
         return
     picture = placeholder1.insert_picture(path)
@@ -278,8 +275,9 @@ def make_page_cv(presentation, theme, numbers, titles, texts, keywords, index):
 
     for idx in range(len(subtitle_by_index)):
         if (idx != 0):
-            text_box_common = group_shape.shapes.add_textbox(Inches(box_x)+Inches(0.25), Inches(box_y) + Inches(0.4 + idx * 0.8),
-                                                             Inches(box_w)-Inches(0.5),
+            text_box_common = group_shape.shapes.add_textbox(Inches(box_x) + Inches(0.25),
+                                                             Inches(box_y) + Inches(0.4 + idx * 0.8),
+                                                             Inches(box_w) - Inches(0.5),
                                                              Inches(0.8))
             text_frame_common = text_box_common.text_frame
             text_frame_common.paragraphs[0].text = titles[subtitle_by_index[idx]]
@@ -290,8 +288,9 @@ def make_page_cv(presentation, theme, numbers, titles, texts, keywords, index):
             text_frame_common.paragraphs[0].font.word_wrap = True
             text_frame_common.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
             if texts[subtitle_by_index[idx]] is not None and str(texts[subtitle_by_index[idx]]) != "nan":
-                text_box_common2 = group_shape.shapes.add_textbox(Inches(box_x)+Inches(0.25), Inches(box_y) + Inches(0.3 + idx * 0.8 + 0.5),
-                                                                  Inches(box_w)-Inches(0.5),
+                text_box_common2 = group_shape.shapes.add_textbox(Inches(box_x) + Inches(0.25),
+                                                                  Inches(box_y) + Inches(0.3 + idx * 0.8 + 0.5),
+                                                                  Inches(box_w) - Inches(0.5),
                                                                   Inches(0.8))
                 text_frame_common2 = text_box_common2.text_frame
                 text_frame_common2.paragraphs[0].text = str("\t" + texts[subtitle_by_index[idx]])
@@ -303,4 +302,3 @@ def make_page_cv(presentation, theme, numbers, titles, texts, keywords, index):
                 text_frame_common2.paragraphs[0].space_after = Inches(0.1)
                 text_frame_common2.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
                 text_frame_common2.auto_size = MSO_AUTO_SIZE.SHAPE_TO_FIT_TEXT
-
