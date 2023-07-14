@@ -7,6 +7,11 @@ from generation.gen_ppt_outline import GenBody, GenTitle, GenOutline
 from mdtree.tree2ppt import Tree2PPT
 import logging
 
+import sys
+import os
+# 把当前文件所在文件夹的父文件夹路径加入到PYTHONPATH
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 app = Flask(__name__)
 # 设置日志级别
 app.logger.setLevel(logging.INFO)
