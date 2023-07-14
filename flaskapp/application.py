@@ -90,5 +90,28 @@ def gen_ppt():
     return response
 
 
+# old outdated
+@app.route('/ppt', methods=['GET'])
+def stream():
+    title1 = request.args.get('title')  # 获取title参数的值
+
+    session_id = str(uuid.uuid4())
+
+    title = GenTitle(session_id)
+    title.predict_title(title1)
+
+    outline = GenOutline(session_id)
+    outline.predict_outline("1")
+
+    body = GenBody(session_id)
+    md = body.predict_body("")
+
+    ppt = Tree2PPT(md)
+    stream = ppt.save_stream()
+    response = make_response(stream)
+    response.headers['Content-Disposition'] = 'attachment; filename=file.pptx_static'
+    return response
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

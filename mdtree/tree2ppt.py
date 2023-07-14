@@ -152,7 +152,8 @@ class MD2Slide:
         tf.word_wrap = True
         # 添加正文
         paragraph = tf.paragraphs[0]
-        paragraph.text = self.content
+        paragraph.text = self.content.replace("<p>", "\t").replace("</p>", "\n")
+        # TODO 处理正文
         self.get_font(paragraph.font, MarkdownCategory.CONTENT)
         paragraph.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
 
