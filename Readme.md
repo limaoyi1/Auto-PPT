@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 > 运行
 ```bash
-python app.py
+python application.py
 ```
 
 > 或者 (生产模式) 需要在 类linux 环境运行以下命令
