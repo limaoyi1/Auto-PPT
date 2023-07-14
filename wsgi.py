@@ -1,3 +1,2 @@
-from flaskapp.application import app
-
+from application import app
 import wsgi
