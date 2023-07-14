@@ -1,4 +1,8 @@
-import sys
 import os
-# 把当前文件所在文件夹的父文件夹路径加入到PYTHONPATH
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+
+# 将父文件夹路径添加到PYTHONPATH
+sys.path.append(parent_dir)
