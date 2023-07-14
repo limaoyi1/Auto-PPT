@@ -1,2 +1,2 @@
-from application import app as application
+from flaskapp import application
 import wsgi
