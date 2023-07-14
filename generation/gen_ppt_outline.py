@@ -1,8 +1,8 @@
 import uuid
 
-from .. mdtree.tree2ppt import Tree2PPT
-from .. readconfig.myconfig import MyConfig
-from .. chain.gpt_memory import GptChain
+from ..mdtree.tree2ppt import Tree2PPT
+from ..readconfig.myconfig import MyConfig
+from ..chain.gpt_memory import GptChain
 
 
 # 抽象父类

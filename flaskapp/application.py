@@ -3,8 +3,8 @@ import uuid
 
 from flask import Flask, request, make_response, render_template, Response
 
-from .. generation.gen_ppt_outline import GenBody, GenTitle, GenOutline
-from .. mdtree.tree2ppt import Tree2PPT
+from ..generation.gen_ppt_outline import GenBody, GenTitle, GenOutline
+from ..mdtree.tree2ppt import Tree2PPT
 import logging
 
 
