@@ -84,7 +84,9 @@ pip install -r requirements.txt
 
 > 4. 在 config.ini 添加你的api key
 
-> 5. 运行项目
+> 5. 将 ./templates/index.html 中的 www.limaoyi.top 替换为 127.0.0.1
+
+> 6. 运行项目
 
 > 运行
 ```bash
@@ -97,7 +99,7 @@ python application.py
 gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicorn.log 2>&1 &
 ```
 
-> 6. 访问 http://127.0.0.1:5000
+> 7. 访问 http://127.0.0.1:5000
 
 ## 💡 下一个版本
 

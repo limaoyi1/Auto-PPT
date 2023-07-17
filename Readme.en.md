@@ -84,7 +84,9 @@ pip install -r requirements.txt
 
 > 4. Add your API key to config.ini
 
-> 5. Run the project
+> 5. 
+
+> 6. Run the project
 
 ```bash
 python application.py
