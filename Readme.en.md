@@ -42,7 +42,7 @@
 
 ## 🛸 Free Trial
 
-> New Version Trial Link 🔗: [Trial Link](http://www.limaoyi.top:4399/)
+> New Version Trial Link 🔗: [Trial Link](http://www.limaoyi.top:4399/#)
 
 > 🧭 Get a professionally designed PPT in just 2-3 minutes. The generation time depends on the speed of the OpenAI interface, ensuring efficient and reliable operation.
 
