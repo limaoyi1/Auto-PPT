@@ -42,7 +42,7 @@
 
 ## 🛸 免费试用
 
->  新版 试用网址 🔗 ： [试用网址](http://www.limaoyi.top:4399/)
+>  新版 试用网址 🔗 ： [试用网址](http://www.limaoyi.top:4399/#)
 
 > 🧭 只需2~3分钟，即可拥有一份专业设计的PPT。生成时间取决于 OpenAI 接口的速度，确保高效和可靠的操作。
 
@@ -144,3 +144,11 @@ gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicor
 ## 🔗 Blog 链接
 
 作者博客:[http://www.limaoyi.top/](http://www.limaoyi.top/)
+
+## 交流 & 赞助 & 定制化开发 
+
+<details>
+  <summary>微信 WeChat</summary>
+
+  ![微信 WeChat](pptx_static/static/img3.png)
+</details>
