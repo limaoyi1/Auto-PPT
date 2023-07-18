@@ -139,6 +139,12 @@ gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicor
 
 </br>
 
-## 🔗 Blog Links
+## 🔗 Communication & Sponsorship & Custom Development
 
-Author's Blog: [http
+<details>
+  <summary>WeChat</summary>
+
+  ![WeChat](pptx_static/static/img3.png)
+</details>
+
+[Author's Blog](http://www.limaoyi.top/)

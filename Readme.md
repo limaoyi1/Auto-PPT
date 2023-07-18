@@ -141,14 +141,12 @@ gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicor
 
 </br>
 
-## 🔗 Blog 链接
-
-作者博客:[http://www.limaoyi.top/](http://www.limaoyi.top/)
-
-## 交流 & 赞助 & 定制化开发 
+## 🔗 交流 & 赞助 & 定制化开发 
 
 <details>
   <summary>微信 WeChat</summary>
 
   ![微信 WeChat](pptx_static/static/img3.png)
 </details>
+
+[作者博客](http://www.limaoyi.top/)
