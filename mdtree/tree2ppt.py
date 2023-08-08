@@ -3,6 +3,7 @@ import os
 from enum import Enum
 from io import BytesIO
 
+import markdown
 from PIL.ImageQt import rgb
 from pptx import Presentation
 from pptx.enum.text import MSO_AUTO_SIZE, MSO_VERTICAL_ANCHOR
@@ -27,9 +28,9 @@ class Tree2PPT:
         self.init_markdown(md_str1)
         self.traverse_tree(self.tree)
         now = datetime.datetime.now().timestamp()
-        path = './../myppt/test' + str(now) + '.pptx'
-        if not os.path.exists('./../myppt'):
-            os.makedirs('./../myppt')
+        path = './myppt/test' + str(now) + '.pptx'
+        if not os.path.exists('./myppt'):
+            os.makedirs('./myppt')
         self.prs.save(path)
         pass
 
@@ -154,13 +155,14 @@ class MD2Slide:
         tf.word_wrap = True
         # 添加正文
         paragraph = tf.paragraphs[0]
-        paragraph.text = self.content.replace("<p>", "\t").replace("</p>", "\n")
+        paragraph.text = self.content.replace("<p>", "").replace("</p>", "\n")
+        self.processing_md_str(self.content.replace("<p>", "").replace("</p>", "\n"))
         # TODO 处理正文
         self.get_font(paragraph.font, MarkdownCategory.CONTENT)
         paragraph.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
 
-
-if __name__ == "__main__":
-    md_content = read_md_file("./txt.md")
-    out = parse_string(md_content)
-    Tree2PPT(md_content)
+    def processing_md_str(self, md_str):
+        print(md_str)
+        md = markdown.Markdown()
+        html1 = md.convert(md_str)
+        print(html1)

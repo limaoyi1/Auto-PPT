@@ -1,13 +1,12 @@
 import datetime
+import logging
 import uuid
 
-from flask import Flask, request, make_response, render_template, Response
+from flask import Flask, request, make_response, render_template, Response, send_from_directory
+from flask_cors import CORS
 
 from generation.gen_ppt_outline import GenBody, GenTitle, GenOutline
 from mdtree.tree2ppt import Tree2PPT
-import logging
-from flask_cors import CORS
-
 
 app = Flask(__name__)
 # 设置日志级别
@@ -30,10 +29,24 @@ app = Flask(__name__)
 CORS(app)
 
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/static/js/<filename>')
+def serve_js(filename):
+    return send_from_directory('./templates/static/js', filename)
+
+
+@app.route('/static/css/<filename>')
+def serve_css(filename):
+    return send_from_directory('./templates/static/css', filename)
+
+
+@app.route('/static/media/<filename>')
+def serve_media(filename):
+    return send_from_directory('./templates/static/media', filename)
 
 
 @app.route('/auto-ppt/gen-uuid', methods=['GET'])
@@ -54,7 +67,8 @@ def stream1():
         form = request.json["form"]
         topic_num = request.json["topic_num"]
         gen_title_v2 = GenTitle(uuid)
-        return Response(gen_title_v2.predict_title_v2(form, role, title, topic_num), mimetype='application/octet-stream')
+        return Response(gen_title_v2.predict_title_v2(form, role, title, topic_num),
+                        mimetype='application/octet-stream')
 
 
 @app.route('/generate_outline', methods=['POST'])
