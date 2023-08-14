@@ -3,7 +3,7 @@ import logging
 import uuid
 
 from flask import Flask, request, make_response, render_template, Response, send_from_directory
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from generation.gen_ppt_outline import GenBody, GenTitle, GenOutline
 from mdtree.tree2ppt import Tree2PPT
@@ -25,8 +25,8 @@ app.logger.addHandler(handler)
 
 app = Flask(__name__)
 
-# 允许跨域
-CORS(app)
+# # 允许跨域
+# CORS(app)
 
 
 @app.route('/')
