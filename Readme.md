@@ -84,9 +84,9 @@
 pip install -r requirements.txt
 ```
 
-> 4. 在 config.ini 添加你的api key
+> 4. 在 config.ini 添加你的api key 
 
-> 5. 将 ./templates/index.html 中的 www.limaoyi.top 替换为 127.0.0.1
+> 5. 修改./readconfig/mycofig.py 的base 绝对路径 使其为config.ini的文件夹路径
 
 > 6. 运行项目
 
