@@ -62,46 +62,32 @@
 
 > 🔒 Secure local deployment: If you're concerned about data security, fret not! Auto_PPT supports local deployment; simply add your OpenAI API key and Unsplash API key information.
 
-## 🎨 Deployment Guide
-
-> The project requires a Python environment, preferably Python 3 or higher. The author used Python 3.9.
-
-> 1. Create a virtual environment
-
-```bash
-   python -m venv venv
+## 🎨  Deployment Guide
+>The project operation requires a Python environment, and it is recommended to use Python 3 or above. The author uses Python 3.9
+>1 Creating a virtual environment
+```Bash
+python - m venv venv
 ```
-
-> 2. Activate the virtual environment
-
-```bash
-   . venv/bin/activate
+>2 Activate virtual environment
+```Bash
+. venv/bin/activate
 ```
-
-> 3. Install the required Python components
-
-```bash
-pip install -r requirements.txt
+>3 Install required Python components
+```Bash
+pip install - r requirements. txt
 ```
-
-> 4. Add your API key in config.ini
-
-> 5. Replace www.limaoyi.top with 127.0.0.1 in ./templates/index.html
-
-> 6. Run the project
-
-> To run:
-```bash
+>4 Add your API key in config.ini
+>5 Modify/ The base absolute path of readconfig/mycofig.py makes it the folder path of config.ini
+>6 Run Project
+>Run
+```Bash
 python application.py
 ```
-
-> Or (production mode) in a Linux-like environment, run the following command
-
-```bash
-gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicorn.log 2>&1 &
+>Alternatively (in production mode), the following commands need to be run in a Linux like environment
+```Bash
+gunicorn - b 0.0.0.0:5000-- log level=debug -- threads 4 app: application>gunicorn. log 2>&1&
 ```
-
-> 7. Visit http://127.0.0.1:5000
+>7 Access http://127.0.0.1:5000
 
 ## 💡 Next Version
 
