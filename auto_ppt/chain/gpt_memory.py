@@ -4,11 +4,14 @@ from langchain.memory import RedisChatMessageHistory, ConversationBufferMemory
 
 
 class GptChain:
-    template: str = """You are a chatbot having a conversation with a human.
-    
-    {chat_history}
-    Human: {human_input}
-    Chatbot:"""
+    template: str = """You are a writing assistant having a conversation with a human.
+Your task is to help people generate an excellent first draft in markdown format, which will be used to make the text part of PPT.
+Answer my question in Simplified Chinese.
+=== 
+{chat_history}
+===
+Human: {human_input}
+Writing Assistant:"""
     openai_api_key: str = None
     session_id: str = None
     redis_url: str = None
@@ -31,12 +34,13 @@ class GptChain:
         )
         self.message_history = message_history
         memory = ConversationBufferMemory(
-            memory_key="chat_history", chat_memory=message_history
+            memory_key="chat_history", chat_memory=message_history, ai_prefix="Writing Assistant", human_prefix="Human"
         )
         prompt = PromptTemplate(
             input_variables=["chat_history", "human_input"], template=self.template)
         llm_chain = LLMChain(
-            llm=OpenAI(model_name="gpt-3.5-turbo", openai_api_key=self.openai_api_key,streaming =True, callbacks=[StreamingStdOutCallbackHandler()]),
+            llm=OpenAI(model_name="gpt-3.5-turbo", openai_api_key=self.openai_api_key, streaming=True,
+                       callbacks=[StreamingStdOutCallbackHandler()]),
             prompt=prompt,
             verbose=True,
             memory=memory,
