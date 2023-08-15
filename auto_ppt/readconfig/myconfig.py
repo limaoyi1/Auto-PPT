@@ -5,7 +5,7 @@ import os
 config = configparser.ConfigParser()
 # 指定编码为 UTF-8
 
-base = "E:\\LocalWarehouse\\github\\Auto-PPT\\"
+base = "E:\\LocalWarehouse\\github\\Auto-PPT\\auto_ppt\\"
 
 
 class MyConfig:
