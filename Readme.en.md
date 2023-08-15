@@ -40,6 +40,7 @@
 > By starring the project, you demonstrate your recognition and help us gain more attention in the community. \
 > This motivates us to continuously improve and develop new features to enhance your experience with Auto_PPT.
 
+> "Special thanks to [Miraitowa-wsy](https://github.com/Miraitowa-wsy) for their sponsorship."
 ## 🛸 Free Trial
 
 > New Version Trial Link 🔗: [Trial Link](http://www.limaoyi.top:4399/#)

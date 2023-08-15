@@ -40,6 +40,8 @@
 > 通过给项目点亮星星，您展示了对我们的认可，并帮助我们在社区中获得更多关注。\
 > 这激励我们不断改进和开发新功能，以提升您使用 Auto_PPT 的体验。
 
+> 鸣谢 [Miraitowa-wsy](https://github.com/Miraitowa-wsy) 老板的赞助.
+
 ## 🛸 免费试用
 
 >  新版 试用网址 🔗 ： [试用网址](http://www.limaoyi.top:4399/#)
