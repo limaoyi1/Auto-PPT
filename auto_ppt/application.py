@@ -25,6 +25,7 @@ app.logger.addHandler(handler)
 
 app = Flask(__name__)
 
+
 # # 允许跨域
 # CORS(app)
 
@@ -47,6 +48,11 @@ def serve_css(filename):
 @app.route('/static/media/<filename>')
 def serve_media(filename):
     return send_from_directory('./templates/static/media', filename)
+
+
+@app.route('/<filename>')
+def serve_json(filename):
+    return send_from_directory('./templates/', filename)
 
 
 @app.route('/auto-ppt/gen-uuid', methods=['GET'])
