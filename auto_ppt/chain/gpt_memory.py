@@ -10,7 +10,7 @@ Answer my question in Simplified Chinese.
 === 
 {chat_history}
 ===
-Human: {human_input}
+Human: {human_input} 
 Writing Assistant:"""
     openai_api_key: str = None
     session_id: str = None
