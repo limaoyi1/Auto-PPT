@@ -10,11 +10,11 @@ from mdtree.tree2ppt import Tree2PPT
 
 app = Flask(__name__)
 # 设置日志级别
-app.logger.setLevel(logging.INFO)
+app.logger.setLevel(logging.DEBUG)
 
 # 创建日志处理器
 handler = logging.FileHandler('app.log', encoding='utf-8')
-handler.setLevel(logging.INFO)
+handler.setLevel(logging.DEBUG)
 
 # 创建日志格式
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
