@@ -1,0 +1,114 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2023/8/17 10:10
+# @Author  : limaoyi
+# @File    : gen_ppt_md.py
+# @Software: PyCharm
+# @GitHub  : https://github.com/limaoyi1/GPT-prompt
+from langchain import OpenAI
+from langchain.callbacks import StreamingStdOutCallbackHandler
+
+from generation.prompt_templates import TitleTemplates, LanguageEnum, OutlineTemplates, OutlineFormatTemplates, \
+    MaterialCollectionTemplates, CompletionTemplates, get_first_line
+from mdtree.parser import parse_string, Parser
+from readconfig.myconfig import MyConfig
+
+
+#  重构这堆垃圾代码
+#  全新的架构方式, 后端只负责生成md, 前端负责转换markdown为PPT
+## 去掉对redis的依赖,保证可以打包作为工具,降低用户依赖
+
+class GenMd:
+    llm = None
+    language = LanguageEnum.Chinese
+    title = ""
+    outline = ""
+    format_outline = ""
+    materials = ""
+    total_text = ""
+
+    # 任务list 完成多个任务:
+    # 获取预设用户信息
+    # 收集信息
+    # 生成标题
+    # 生成大纲
+    # 校对大纲
+    # 收集素材
+
+    # 生成全文 tree
+
+    def __init__(self, profession, topic, model_name="gpt-3.5-turbo", language="chinese"):
+        self.profession = profession
+        self.topic = topic
+        self.llm = None
+        self.load_my_llm(model_name)
+        self.load_language(language)
+        self.gen_title()
+        self.gen_outline()
+        self.format_cleanup_outline()
+        # self.material_collection() 难以获取到真实数据
+        self.tree_to_md()
+        # 思维风暴
+
+    # 支持切换多种模型
+    def load_my_llm(self, model_name="gpt-3.5-turbo"):
+        config = MyConfig()
+        if model_name == "gpt-3.5-turbo":
+            self.llm = OpenAI(model_name="gpt-3.5-turbo", openai_api_key=config.OPENAI_API_KEY, streaming=True,
+                              temperature=0.7,
+                              openai_url_base=config.OPENAI_BASE_URL, callbacks=[StreamingStdOutCallbackHandler()])
+            return
+
+    def load_language(self, language: str = "chinese"):
+        if language == "chinese" or language == "chs":
+            self.language = LanguageEnum.Chinese
+        elif language == "english":
+            self.language = LanguageEnum.English
+
+    def gen_title(self):
+        title_template = TitleTemplates(self.profession, self.topic).build(self.language)
+        title = self.llm.predict(title_template)
+        # print(title)
+        self.title = title
+
+    def gen_outline(self):
+        outline_template = OutlineTemplates(self.profession, self.topic, self.title).build(self.language)
+        outline = self.llm.predict(outline_template)
+        self.outline = outline
+
+    def format_cleanup_outline(self):
+        outline_template = OutlineFormatTemplates(self.outline).build(self.language)
+        format_outline = self.llm.predict(outline_template)
+        self.format_outline = format_outline
+
+    def material_collection(self):
+        material_template = MaterialCollectionTemplates(self.format_outline).build(self.language)
+        materials = self.llm.predict(material_template)
+        self.materials = materials
+
+    def tree_to_md(self):
+        # 减少api调用次数 只对二级标题进行遍历
+        Parser(self.format_outline)
+        parser = Parser()
+        parser.parse(self.format_outline)
+        out = parser.out
+        # 获取第一级
+        total_text = ""
+        main = out.main
+        if main.level == 1:
+            total_text += "# " + main.text + "\n"
+            # 获取第二级
+            childrens = main.children
+            for child in childrens:
+                print(child.full_source)
+                completion_template = CompletionTemplates(child.full_source).build(self.language)
+                completion = self.llm.predict(completion_template)
+                first_line = get_first_line(child.full_source)
+                total_text += first_line + "\n"
+                total_text += completion + "\n"
+        print("--------------------------------")
+        self.total_text = total_text
+        print(total_text)
+
+
+if __name__ == "__main__":
+    md = GenMd("新人主播", "新人主播如何进行直播")
