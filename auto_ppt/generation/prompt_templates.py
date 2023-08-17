@@ -82,7 +82,7 @@ class CompletionTemplates(PromptTemplates):
 ```markdown
 {outline}
 ```
-输出内容之后,需要使用unsplash在内容下一行，增加一张合适的主题配图，格式为:![主题](https://source.unsplash.com/1000x600/?+英文主题).
+每一个最小子标题都需要使用unsplash在内容的下一行，增加一张合适的主题配图，格式为:![主题](https://source.unsplash.com/1000x600/?+英文主题).
 不要返回其他内容,方便我直接插入markdown.
 新的markdown:
 {first_line}"""
