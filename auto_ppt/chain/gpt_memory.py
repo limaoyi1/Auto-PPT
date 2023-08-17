@@ -1,10 +1,12 @@
 from langchain import PromptTemplate, OpenAI, LLMChain
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.memory import RedisChatMessageHistory, ConversationBufferMemory
+from langchain.schema import BaseMessage
+from typing_extensions import List
 
 
 class GptChain:
-    template: str = """You are a writing assistant having a conversation with a human.
+    template: str = """You are a writing ai having a conversation with a human.
 Your task is to help people generate an excellent first draft in markdown format, which will be used to make the text part of PPT.
 Answer my question in Simplified Chinese.
 === 
@@ -18,10 +20,11 @@ Writing Assistant:"""
     llm_chain: LLMChain = None
     message_history: RedisChatMessageHistory = None
 
-    def __init__(self, openai_api_key, session_id, redis_url):
+    def __init__(self, openai_api_key, session_id, redis_url, openai_url_base="https://api.openai.com/v1"):
         self.openai_api_key = openai_api_key
         self.session_id = session_id
         self.redis_url = redis_url
+        self.openai_url_base = openai_url_base
         self.redis_llm_chain_factory()
 
     def redis_llm_chain_factory(self):
@@ -34,12 +37,13 @@ Writing Assistant:"""
         )
         self.message_history = message_history
         memory = ConversationBufferMemory(
-            memory_key="chat_history", chat_memory=message_history, ai_prefix="Writing Assistant", human_prefix="Human"
+            memory_key="chat_history", chat_memory=message_history, ai_prefix="Writing ai", human_prefix="Human"
         )
         prompt = PromptTemplate(
             input_variables=["chat_history", "human_input"], template=self.template)
         llm_chain = LLMChain(
             llm=OpenAI(model_name="gpt-3.5-turbo", openai_api_key=self.openai_api_key, streaming=True,
+                       openai_url_base=self.openai_url_base,
                        callbacks=[StreamingStdOutCallbackHandler()]),
             prompt=prompt,
             verbose=True,
@@ -53,8 +57,17 @@ Writing Assistant:"""
     def clear_redis(self):
         self.message_history.clear()
 
+    def get_history_last(self):
+        message_history = RedisChatMessageHistory(
+            url=self.redis_url, ttl=600, session_id=self.session_id
+        )
+        self.message_history = message_history
+        list1: List[BaseMessage] = message_history.messages
+        return list1[len(list1) - 1].content
+
 
 if __name__ == "__main__":
     chain = GptChain("you key", "1234", "you redis url")
-    song = chain.predict(question="Write me a song about sparkling water.")
+    # song = chain.predict(question="Write me a song about love.")
     # print(song)
+    print(chain.get_history_last())

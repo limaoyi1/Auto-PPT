@@ -99,7 +99,9 @@ def stream3():
         requirement = request.json["requirement"]
         gen_body1 = GenBody(uuid)
         # 以流的方式返回结果
-        return Response(gen_body1.predict_body(outline, requirement), mimetype='application/octet-stream')
+        # return Response(gen_body1.predict_body(outline, requirement), mimetype='application/octet-stream')
+        return Response(gen_body1.predict_body_v3(), mimetype='application/octet-stream')
+
 
 
 @app.route('/generate_ppt', methods=['POST'])
@@ -118,6 +120,26 @@ def gen_ppt():
         now = datetime.datetime.now().timestamp()
         response.headers['Content-Disposition'] = 'attachment; filename=' + str(now) + '.pptx'
         return response
+
+
+@app.route('/generate_markdown', methods=['POST'])
+def gen_markdown():
+    if request.method == "POST":
+        title = request.json["title"]
+        uuid = request.json["uuid"]
+        ip_address = request.remote_addr
+        app.logger.info(f'ip地址为 {ip_address}\t uuid 为 {uuid}\t生成了标题')
+        role = request.json["role"]
+        form = request.json["form"]
+        topic_num = request.json["topic_num"]
+        gen_title_v2 = GenTitle(uuid)
+        gen_outline_v2 = GenOutline(uuid)
+        gen_title_v2.predict_title_v2(form, role, title, topic_num)
+        gen_outline_v2.predict_outline_v3("1", requirement = "")
+        gen_body1 = GenBody(uuid)
+        gen_body1.predict_body_v3()
+        return Response(gen_body1.predict_body_v3(),
+                        mimetype='application/octet-stream')
 
 
 # old outdated

@@ -64,6 +64,7 @@ class TaskCreationChain(LLMChain):
         """Get the response parser."""
         task_creation_template = (
             "你是一个任务创建人工智能，使用执行代理的结果"
+            # "你的主要用途是创建写作的步骤.一般来说有以下一些通用的步骤"
             "创建具有以下目标的新任务：{objective}，"
             "最后完成的任务的结果是：{result}。"
             "此结果基于此任务描述：{task_description}。"
