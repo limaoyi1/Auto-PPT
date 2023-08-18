@@ -6,13 +6,12 @@
 # @GitHub  : https://github.com/limaoyi1/GPT-prompt
 from langchain import OpenAI
 
+from generation.load_my_llms import LoadMyLLM
 from generation.prompt_templates import TitleTemplates, LanguageEnum, OutlineTemplates, OutlineFormatTemplates, \
     MaterialCollectionTemplates, CompletionTemplates, get_first_line
 from mdtree.parser import Parser
 from readconfig.myconfig import MyConfig
 
-
-#  重构这堆垃圾代码
 #  全新的架构方式, 后端只负责生成md, 前端负责转换markdown为PPT
 ## 去掉对redis的依赖,保证可以打包作为工具,降低用户依赖
 
@@ -31,9 +30,8 @@ class GenMd:
     # 生成标题
     # 生成大纲
     # 校对大纲
-    # 收集素材
-
     # 生成全文 tree
+    # 需要校对全文吗?
 
     def __init__(self, profession, topic, model_name="gpt-3.5-turbo", language="chinese"):
         self.profession = profession
@@ -52,11 +50,8 @@ class GenMd:
 
     # 支持切换多种模型
     def load_my_llm(self, model_name="gpt-3.5-turbo"):
-        config = MyConfig()
         if model_name == "gpt-3.5-turbo":
-            self.llm = OpenAI(model_name="gpt-3.5-turbo", openai_api_key=config.OPENAI_API_KEY, streaming=False,
-                              temperature=0.7,
-                              openai_url_base=config.OPENAI_BASE_URL)
+            self.llm = LoadMyLLM(model_name).run()
             return
 
     def load_language(self, language: str = "chinese"):

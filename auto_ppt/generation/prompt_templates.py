@@ -42,6 +42,10 @@ class OutlineTemplates(PromptTemplates):
 你已经为你的演示报告PPT写一个标题{title}.现在你需要用markdown的格式写一个大纲.
 大纲的全部由标题组成(\"#,##,###\")和无序列表(\"-,*\")组成,标题不能超过3级.
 ```markdown"""
+        self.english = f"""I want you to act as a {profession} and prepare a presentation in front of an audience on the topic {topic}.
+You have written a title {title} for your powerpoint presentation. Now you need to write an outline in markdown format.
+All outline is composed of the title (\ "#, ##, ###\") and unordered list (\ "-- - * \"), the title should not exceed 3.
+```markdown"""
 
 
 class OutlineFormatTemplates(PromptTemplates):
@@ -57,6 +61,15 @@ class OutlineFormatTemplates(PromptTemplates):
 {outline}
 ```
 新markdown:"""
+        self.english = f"""You are a Markdown formatting AI, responsible for formatting, proofreading syntax, and polishing headings. You need to modify the original markdown to a new markdown consisting entirely of headings (\"#,##,###\"). 
+If the original markdown has unordered lists (-, *) or ordered lists (1.), create a subhead (\"##,###,####\") to replace the original list. Remove characters from unordered or ordered lists ("-, *,1." etc.) 
+I hope you can replace my A0 simplified words and sentences with more elegant and advanced words and sentences, keeping the same meaning and making the title more literary.
+I need you to delete the notes and information irrelevant to the topic, and organize the outline to make it more streamlined.
+Here is the original markdown:
+```markdown 
+{outline}
+```
+New markdown: """
 
 
 class MaterialCollectionTemplates(PromptTemplates):
@@ -69,6 +82,13 @@ class MaterialCollectionTemplates(PromptTemplates):
 {outline}
 ```
 素材:"""
+        self.english = f"""You're an encyclopedic retrieval AI that helps people with materials they might need to write about, such as papers, current events, conclusions, or data. I'll give you an outline of the article, and you'll need to retrieve 10 possible sources.
+You need to label each piece of data with a specific source. Don't try to fudge the truth.
+Here's my outline:
+```markdown
+{outline}
+` ` `
+Material :"""
 
 
 class CompletionTemplates(PromptTemplates):
@@ -86,6 +106,39 @@ class CompletionTemplates(PromptTemplates):
 不要返回其他内容,方便我直接插入markdown.
 新的markdown:
 {first_line}"""
+        self.english = f""" You are an experienced PPT writer who is good at helping others write a complete presentation and provide it through markdown's code.
+Don't allow you to create a title, brief and to the point, according to the kid title (###,####) to generate text, not according to the second-level heading to generate text (##)
+You can include interesting cases, examples, tabular data, or quotes to support your argument. Keep your content simple and elegant
+Here are a few simple slides
+```markdown
+{outline}
+` ` `
+For each subtitle, use unsplash to add an appropriate theme image to the next line of content in the format :! [subject] (https://source.unsplash.com/1000x600/?+ English topic).
+Don't return anything else, so I can just insert markdown.
+New markdown:
+{first_line}"""
+
+
+class PolishTemplates(PromptTemplates):
+    def __init__(self, markdown_str):
+        super().__init__()
+        self.chinese = f"""我希望你能成为一名专业的拼写和语法纠错者和改进者。
+我想让你用更漂亮优雅的中文词语和句子代替我的简化的a0级词语和句子。
+保持意思不变，不要改变我文章的结构，但使它们更有文学性或者学术性，并提高我作为行业专家的风格表达。
+这是我的降价:
+```markdown
+{markdown_str}
+```
+新markdown:"""
+        self.english = f"""I want you to act as an professional spelling and grammer corrector and improver.
+I want you to replace my simplified A0-level words and sentences with more beautiful and elegant, upper level English words and sentences.
+Keep the meaning the same, don't change the structure of my articles, but make them more literary or academic, and improve my style of presentation as an industry expert.
+This is my markdown:
+```markdown
+{markdown_str}
+```
+new markdown:"""
+
 
 def get_first_line(input_string):
     lines = input_string.split('\n')

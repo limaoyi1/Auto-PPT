@@ -3,6 +3,9 @@ import logging
 from flask import Flask, render_template, send_from_directory, request, Response
 from flask_cors import CORS
 
+from generation.gen_other import OptimizeMd
+from generation.gen_ppt_md import GenMd
+
 app = Flask(__name__)
 # 设置日志级别
 app.logger.setLevel(logging.DEBUG)
@@ -52,24 +55,32 @@ def serve_json(filename):
 @app.route('/generate_markdown', methods=['POST'])
 def gen_markdown():
     if request.method == "POST":
-        title = request.json["title"]
-        uuid = request.json["uuid"]
+        profession = request.json["profession"]
+        topic = request.json["topic"]
+        model_name = request.json["model_name"]
+        language = request.json["language"]
         ip_address = request.remote_addr
-        app.logger.info(f'ip地址为 {ip_address}\t uuid 为 {uuid}\t生成了标题')
-        role = request.json["role"]
-        form = request.json["form"]
-        topic_num = 1
-        gen_title_v2 = GenTitle(uuid)
-        gen_outline_v2 = GenOutline(uuid)
-        gen_title_v2.predict_title_v2(form, role, title, 1)
-        gen_outline_v2.predict_outline_v3("1", title_requirement="")
-        gen_body1 = GenBody(uuid)
-        gen_body1.predict_body_v3()
-        return Response(gen_body1.predict_body_v3(),
-                        mimetype='application/octet-stream')
+        app.logger.info(f'ip地址为 {ip_address}\t 请求生成PPT文本')
+        gen = GenMd(profession, topic, model_name, language)
+        md = gen.run()
+        return Response(md, mimetype='application/octet-stream')
     elif request.method != "POST":
-        return Response("不支持POST请求外的其他请求",
-                        mimetype='application/octet-stream')
+        return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
+
+
+@app.route('/smart_rewrite', methods=['POST'])
+def smart_rewrite():
+    if request.method == "POST":
+        markdown = request.json["markdown"]
+        model_name = request.json["model_name"]
+        language = request.json["language"]
+        ip_address = request.remote_addr
+        app.logger.info(f'ip地址为 {ip_address}\t 请求智能改写')
+        gen = OptimizeMd(model_name, language)
+        rewrite = gen.smart_rewrite(markdown)
+        return Response(rewrite, mimetype='application/octet-stream')
+    elif request.method != "POST":
+        return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
 
 
 if __name__ == '__main__':
