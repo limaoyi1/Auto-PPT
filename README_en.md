@@ -7,12 +7,11 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/limaoyi1/Auto_PPT/fork" target="blank">
-<img src="https://img.shields.io/github/forks/limaoyi1/Auto_PPT?style=for-the-badge" alt="Auto_PPT forks"/>
-</a>
-
 <a href="https://github.com/limaoyi1/Auto_PPT/stargazers" target="blank">
 <img src="https://img.shields.io/github/stars/limaoyi1/Auto_PPT?style=for-the-badge" alt="Auto_PPT stars"/>
+</a>
+<a href="https://github.com/limaoyi1/Auto_PPT/fork" target="blank">
+<img src="https://img.shields.io/github/forks/limaoyi1/Auto_PPT?style=for-the-badge" alt="Auto_PPT forks"/>
 </a>
 <a href="https://github.com/limaoyi1/Auto_PPT/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/limaoyi1/Auto_PPT?style=for-the-badge" alt="Auto_PPT pull-requests"/>
