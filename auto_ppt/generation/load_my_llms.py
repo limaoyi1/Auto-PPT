@@ -67,13 +67,13 @@ class LoadMyLLM(object):
 
     def _check_openai(self):
         if self.config.OPENAI_API_KEY == "your-openai-api-key":
-            raise ConfigIniError("No OPENAI_API_KEY is configured in config.ini")
+            raise ConfigIniError("No OPENAI_API_KEY is configured in config")
 
     def _check_ernie(self):
         if self.config.ERNIE_CLIENT_ID == "your-ernie-client-id":
-            raise ConfigIniError("No ERNIE_CLIENT_ID is configured in config.ini")
+            raise ConfigIniError("No ERNIE_CLIENT_ID is configured in config")
         if self.config.ERNIE_CLIENT_SECRET == "your-ernie-client-secret":
-            raise ConfigIniError("No ERNIE_CLIENT_SECRET is configured in config.ini")
+            raise ConfigIniError("No ERNIE_CLIENT_SECRET is configured in config")
 
 
 # test
