@@ -1,6 +1,10 @@
-# <p align="center">Auto_PPT 自动生成你的PPT</p>
+# <p align="center">Auto-PPT</p>
 
-<p align="center"><i>你是否厌倦了花费无尽的时间来制作乏味的演示文稿？是否希望有一个魔法工具，能够在几秒钟内为你生成令人惊叹的PPT？别担心，我们为你带来了Auto_PPT！</i></p>
+#### <p align="center"><i>GPT赋能，PPT创作革命</i></p>
+
+<p align="center">
+<br> 中文 | <a href="README_en.md">English</a>
+</p>
 
 <p align="center">
 <a href="https://github.com/limaoyi1/Auto_PPT/fork" target="blank">
@@ -24,16 +28,21 @@
 
 [//]: # (https://github.com/ikatyang/emoji-cheat-sheet 表情仓库)
 
-## 🔥 [English Guide](./Readme.en.md)
+## 🎞️ 项目介绍
 
-> please visit [English Guide](./Readme.en.md)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;制作演示文档常常是许多人繁重的日常任务，琐碎的文案、特效和格式使得这项工作可能每天都成为困扰。然而，随着AI浪潮的席卷，这一现状正在悄然发生着改变，而我恰巧踏上了AIGC应用开发的道路。
 
-## 🎞️ 项目介绍 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这股AI浪潮中，我开始思考如何创造能够减轻人们负担的解决方案。Auto-PPT便是我首个成熟构想的产物，“登高必自卑，观远必自眇”,通过几个月的尝试和不断的优化，如今它已经越发成熟。
 
-> 使用 gpt-3.5-turbo 和 pptx 一站式生成指定主题的PPTX文件。 \
-> ![img.png](pptx_static/static/img2.png)
-> 以下是通过项目生成的原始示例：
-> ![img.png](pptx_static/static/img.png)
+## 💥 重要更新
+
+> 2023/8/18 | v3.0 几乎完成重构项目
+> - 重构后端服务,去除对redis的使用,改为sqlite3,去除对python-pptx的依赖
+> - 重构前端服务,支持前端编辑Markdown,浏览Markdown,操作PPT
+> - 制作在线编辑markdwon2ppt开源组件
+> - 支持GPT3.5 ,GPT4 ,百度文心一言
+> - 优化大纲和全文的生成效果和质量,优化了langchain的使用
+> - 完全支持英语和中文
 
 ## ⭐ 感谢支持
 
@@ -42,68 +51,73 @@
 
 > 鸣谢 [Miraitowa-wsy](https://github.com/Miraitowa-wsy) 老板的赞助.
 
-## 🛸 免费试用
+## 🤝 交流
 
->  新版 试用网址 🔗 ： [试用网址](http://www.limaoyi.top:4399/#)
+### 微信群
+<details>
+  <summary>微信群 入群二维码 有效期到2月25日</summary>
 
-> 🧭 只需2~3分钟，即可拥有一份专业设计的PPT。生成时间取决于 OpenAI 接口的速度，确保高效和可靠的操作。
+  ![微信 WeChat](./static/ql_0825.jpg)
+</details>
 
-> 🔗 立即试用，让我们一同探索 Auto_PPT 的神奇之处！请注意，为了维护有限的服务器流量，我们暂不提供随机图片服务。
+### 作者微信
+<details>
+  <summary>作者微信二维码</summary>
 
-## 🧲 项目优势
+  ![微信 WeChat](./static/lmy_wx.jpg)
+</details>
 
-> 🌟 不再费心思：只需输入标题，Auto_PPT将立即为你创造一份全新的PPTX，无需任何额外努力！
+### 请我喝咖啡?
+<details>
+  <summary>作者微信赞赏码</summary>
 
-> 🎩 魔法背后的秘密：我们借助强大的gpt-3.5-turbo-16k接口，确保每次生成的PPT大纲都稳定而令人印象深刻。
+  ![微信 WeChat](./static/lmy_jz.jpg)
+</details>
 
-> 💡 创造性使用md格式：我们独特地运用md格式多步链式地生成PPT文本，使PPTX制作变得更加容易和稳定。告别格式困扰，让你专注于内容的创作！
+## 🛸 使用方式
 
-> 🔗 在v1.0使用langchain对程序进行优化和重构,感谢langchain可以让代码变得简单,轻松和美观!
+### 在线使用
 
-> 🖼️ 风景图插图：我们与Unsplash合作，提供最精美的插图，让你的PPT瞬间焕发生机与美感。
+> 新版 试用网址 🔗 ： [试用网址](http://www.limaoyi.top:4399/#) 只需2~3分钟，即可拥有一份专业设计的PPT。
 
-> 🔒 安全本地部署：如果你担心数据安全问题，不用担心！Auto_PPT支持本地部署，只需添加你的OpenAI API密钥和Unsplash API密钥信息即可。
+### 本地部署
 
-## 🎨 部署指南
+#### windows打包软件
+> 暂时还没有打包
 
-> 项目运行需要python环境 ，推荐python3以上，作者使用的是python3.9
-
-> 1. 创建虚拟环境
-
+#### windows
+##### 1. 打开cmd或者其他终端,把项目到本地
 ```bash
-   python -m venv venv
+git clone https://github.com/limaoyi1/Auto-PPT.git
 ```
-
-> 2. 激活虚拟环境
-
+##### 2. 签出main分支
 ```bash
-   . venv/bin/activate
+git checkout main 
 ```
-
-> 3. 安装要求的python组件
-
+##### 3. 创建虚拟环境并且激活
 ```bash
-pip install -r requirements.txt
+python -m venv myenv
+cd .\myenv\Scripts
+activate
+cd ../../
 ```
+##### 在/auto_ppt/config.ini添加你的秘钥
+[config.ini](./auto_ppt/config.ini)
 
-> 4. 在 config.ini 添加你的api key 
-
-> 5. 修改./readconfig/mycofig.py 的base 绝对路径 使其为config.ini的文件夹路径
-
-> 6. 运行项目
-
-> 运行
+##### 4. Auto-PPT, 启动!
 ```bash
 python application.py
 ```
+##### 访问本地网页
+[localhost:5000](http://localhost:5000/)
 
-> 或者 (生产模式) 需要在 类linux 环境运行以下命令
+#### linux
+> 同理,不过我推荐使用nginx单独转发静态页面
 
-```bash
-gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicorn.log 2>&1 &
-```
+## 🌟 Star History
 
-> 7. 访问 http://127.0.0.1:5000
+[![Star History Chart](https://api.star-history.com/svg?repos=limaoyi1/Auto_PPT&type=Timeline)](https://star-history.com/#limaoyi1/Auto_PPT&Timeline)
+
 
 ## 💡 下一个版本
 
@@ -125,29 +139,24 @@ gunicorn -b 0.0.0.0:5000 --log-level=debug --threads 4 app:application > gunicor
 | 优化生成步骤          | 单一步骤难以一步完成一个优质的PPT | 7.14已完成  |
 | 使用langChain优化项目 | 优化为链式调用            | 7.14已完成  |
 
+> 2023/7/15 | v1.5 | 继续优化python转pptx | 已经完成 ✔
+>
 
-> 2023/7/15 | v1.5 | 下一个版本需要完成的内容 | 开始 🧭
-> 
-| 蓝图             | 存在问题           | 完成情况   |
-|----------------|----------------|--------|
-| 兼容更多md格式       | md的格式工作量很大     | 刚开始    |
-| 选用一种前端语言重构前端代码 | 作为后端工程师对前端的不熟悉 | 已经完成 ✔ |
-| 优化主题的效果        | 没有美感的ppt模板参考   | 刚开始    |
+| 蓝图             | 存在问题           | 完成情况           |
+|----------------|----------------|----------------|
+| 兼容更多md格式       | md的格式工作量很大     | 前端支持md展示和PPT转换 |
+| 选用一种前端语言重构前端代码 | 作为后端工程师对前端的不熟悉 | 已经完成 ✔         |
+| 优化主题的效果        | 没有美感的ppt模板参考   | 推迟到下一个版本       |
+| 优化部署           | fork后难以快速使用    | 已经完成 ✔         |
 
-## 🌟 Star History
+> 2023/8/18 | v3.0 几乎完成重构项目 | 已经完成 ✔
+>
 
-<br>
-
-[![Star History Chart](https://api.star-history.com/svg?repos=limaoyi1/Auto_PPT&type=Timeline)](https://star-history.com/#limaoyi1/Auto_PPT&Timeline)
-
-</br>
-
-## 🔗 交流 & 赞助 & 定制化开发 
-
-<details>
-  <summary>微信 WeChat</summary>
-
-  ![微信 WeChat](pptx_static/static/img3.png)
-</details>
-
-[作者博客](http://www.limaoyi.top/)
+|           蓝图           |                  优化内容                   | 完成情况 |
+|:----------------------:|:---------------------------------------:|:----:|
+|         重构后端服务         | 去除对redis的使用，改为sqlite3，去除对python-pptx的依赖 | 完成 ✔ |
+|         重构前端服务         |     支持前端编辑Markdown，浏览Markdown，操作PPT     | 完成 ✔ |
+| 制作在线编辑markdwon2ppt开源组件 |                                         | 完成 ✔ |
+|  支持GPT3.5，GPT4，百度文心一言  |                                         | 完成 ✔ |
+|    优化大纲和全文的生成效果和质量     |             优化了langchain的使用             | 完成 ✔ |
+|       完全支持英语和中文        |                                         | 完成 ✔ |
