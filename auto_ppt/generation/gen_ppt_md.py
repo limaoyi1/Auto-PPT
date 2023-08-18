@@ -5,11 +5,10 @@
 # @Software: PyCharm
 # @GitHub  : https://github.com/limaoyi1/GPT-prompt
 from langchain import OpenAI
-from langchain.callbacks import StreamingStdOutCallbackHandler
 
 from generation.prompt_templates import TitleTemplates, LanguageEnum, OutlineTemplates, OutlineFormatTemplates, \
     MaterialCollectionTemplates, CompletionTemplates, get_first_line
-from mdtree.parser import parse_string, Parser
+from mdtree.parser import Parser
 from readconfig.myconfig import MyConfig
 
 
