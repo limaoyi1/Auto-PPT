@@ -46,7 +46,11 @@
 ## ⭐ 感谢支持
 
 > 通过给项目点亮星星，您展示了对我们的认可，并帮助我们在社区中获得更多关注。\
-> 这激励我们不断改进和开发新功能，以提升您使用 Auto_PPT 的体验。
+> 这激励我们不断改进和开发新功能，以提升您使用 Auto_PPT 的体验。\
+> 
+> 主要贡献者: 
+> - v3.0 后端 [limaoyi](https://github.com/limaoyi1)
+> - v3.0 前端 [liumengniu](https://github.com/liumengniu)
 
 > 鸣谢 [Miraitowa-wsy](https://github.com/Miraitowa-wsy) 老板的赞助.
 

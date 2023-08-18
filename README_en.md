@@ -46,7 +46,11 @@
 ## ⭐ Thank You for Your Support
 
 > By starring the project, you show your recognition and help us gain more attention in the community.\
-> This motivates us to continuously improve and develop new features, enhancing your experience with Auto_PPT.
+> This motivates us to continuously improve and develop new features, enhancing your experience with Auto_PPT.\
+> 
+> Main Contributors:
+- v3.0 Backend [limaoyi](https://github.com/limaoyi1)
+- v3.0 Frontend [liumengniu](https://github.com/liumengniu)
 
 > Special thanks to [Miraitowa-wsy](https://github.com/Miraitowa-wsy) for their sponsorship.
 
