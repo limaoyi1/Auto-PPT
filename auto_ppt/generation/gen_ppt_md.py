@@ -4,13 +4,13 @@
 # @File    : gen_ppt_md.py
 # @Software: PyCharm
 # @GitHub  : https://github.com/limaoyi1/GPT-prompt
-from langchain import OpenAI
+from langchain.schema import HumanMessage, LLMResult
 
 from generation.load_my_llms import LoadMyLLM
 from generation.prompt_templates import TitleTemplates, LanguageEnum, OutlineTemplates, OutlineFormatTemplates, \
     MaterialCollectionTemplates, CompletionTemplates, get_first_line
 from mdtree.parser import Parser
-from readconfig.myconfig import MyConfig
+
 
 #  全新的架构方式, 后端只负责生成md, 前端负责转换markdown为PPT
 ## 去掉对redis的依赖,保证可以打包作为工具,降低用户依赖
@@ -103,19 +103,23 @@ class GenMd:
             total_text += "# " + main.text + "\n"
             # 获取第二级
             childrens = main.children
+            batch_list = []
             for child in childrens:
                 # print(child.full_source)
                 completion_template = CompletionTemplates(child.full_source).build(self.language)
-                completion = self.llm.predict(completion_template)
-                first_line = get_first_line(child.full_source)
+                batch_list.append([HumanMessage(content=completion_template)])
+            results: LLMResult = self.llm.generate(batch_list)
+            for i in range(len(childrens)):
+                first_line = get_first_line(childrens[i].full_source)
                 total_text += first_line + "\n"
-                total_text += completion + "\n"
+                total_text += results.generations[i][0].text + "\n"
+            print(results.llm_output)
         self.total_text = total_text
         print(total_text)
         print("\033[95m\033[1m" + "\n*****Gen Over*****\n" + "\033[0m\033[0m")
 
 
 if __name__ == "__main__":
-    md = GenMd("新人主播", "新人主播如何进行直播")
+    md = GenMd("程序员", "开源项目如何运维")
     run = md.run()
     print(run)

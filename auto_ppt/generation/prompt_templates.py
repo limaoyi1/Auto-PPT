@@ -40,11 +40,11 @@ class OutlineTemplates(PromptTemplates):
         super().__init__()
         self.chinese = f"""我希望你扮演一名{profession},准备在听众面前进行演示报告,话题是{topic}.
 你已经为你的演示报告PPT写一个标题{title}.现在你需要用markdown的格式写一个大纲.
-大纲的全部由标题组成(\"#,##,###\")和无序列表(\"-,*\")组成,标题不能超过3级.
+大纲的全部由标题组成(\"#,##\")和无序列表(\"-,*\")组成,标题不能超过3级.
 ```markdown"""
         self.english = f"""I want you to act as a {profession} and prepare a presentation in front of an audience on the topic {topic}.
 You have written a title {title} for your powerpoint presentation. Now you need to write an outline in markdown format.
-All outline is composed of the title (\ "#, ##, ###\") and unordered list (\ "-- - * \"), the title should not exceed 3.
+All outline is composed of the title (\ "#, ##\") and unordered list (\ "-- - * \"), the title should not exceed 3.
 ```markdown"""
 
 
@@ -102,7 +102,7 @@ class CompletionTemplates(PromptTemplates):
 ```markdown
 {outline}
 ```
-每一个最小子标题都需要使用unsplash在内容的下一行，增加一张合适的主题配图，格式为:![主题](https://source.unsplash.com/1000x600/?+英文主题).
+每一个最小子标题都需要使用unsplash在子标题的下一行，增加一张合适的主题配图，格式为:![主题](https://source.unsplash.com/1000x600/?+英文主题).
 不要返回其他内容,方便我直接插入markdown.
 新的markdown:
 {first_line}"""
@@ -146,3 +146,37 @@ def get_first_line(input_string):
         return lines[0].strip()
     else:
         return ""
+
+
+class VerbatimTemplates(PromptTemplates):
+    def __init__(self, markdown_str):
+        super().__init__()
+        self.chinese = f"""我希望你能成为一名逐字稿编写AI,为我的PPT写成一篇逐字稿。我会把我的PPT文本内容用markdown的方式告诉你.
+你需要生成一篇逐字稿文章段落介绍某一张幻灯片中的内容:
+```markdown
+{markdown_str}
+```
+我想让你用使用更口语化的语言和更风趣幽默,更有感染力的风格.
+保持意思不变和内容的简洁，并提高我作为行业专家的风格表达。
+逐字稿:"""
+        self.english = f"""I hope you can become a verbatim writing AI and write a verbatim draft for my PPT. I will tell you my PPT text content in markdown.
+You need to generate a verbatim article paragraph describing the content of a certain slide:
+```markdown
+{markdown_str}
+```
+I want you to use a more colloquial language and a more humorous and infectious style.
+Keep the meaning constant and the content concise, and improve my stylistic expression as an industry expert.
+Transcript:"""
+
+
+class DataCollectionTemplates(PromptTemplates):
+    def __init__(self, markdown_str):
+        super().__init__()
+        self.chinese = f"""我希望你成为一个数据检索引擎,我会给你主题内容,你需要给我一组或者多组数据帮助我论证我的观点.你需要提供数据的来源和时间.你需要使用markdown的表格格式返回.
+不要试图编造数据,如果没有检索到,请返回"我没有检索到数据"
+这是我的主题:
+```markdown
+{markdown_str}
+```
+数据:
+"""

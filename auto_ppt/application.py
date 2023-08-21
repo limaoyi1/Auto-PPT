@@ -83,5 +83,35 @@ def smart_rewrite():
         return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
 
 
+@app.route('/generate_verbatim', methods=['POST'])
+def generate_verbatim():
+    if request.method == "POST":
+        markdown = request.json["markdown"]
+        model_name = request.json["model_name"]
+        language = request.json["language"]
+        ip_address = request.remote_addr
+        app.logger.info(f'ip地址为 {ip_address}\t 请求生成逐字稿')
+        gen = OptimizeMd(model_name, language)
+        rewrite = gen.generate_verbatim(markdown)
+        return Response(rewrite, mimetype='application/octet-stream')
+    elif request.method != "POST":
+        return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
+
+
+@app.route('/smart_form', methods=['POST'])
+def smart_form():
+    if request.method == "POST":
+        markdown = request.json["markdown"]
+        model_name = request.json["model_name"]
+        language = request.json["language"]
+        ip_address = request.remote_addr
+        app.logger.info(f'ip地址为 {ip_address}\t 请求智能改写')
+        gen = OptimizeMd(model_name, language)
+        rewrite = gen.smart_form(markdown)
+        return Response(rewrite, mimetype='application/octet-stream')
+    elif request.method != "POST":
+        return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
