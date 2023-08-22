@@ -50,9 +50,8 @@ class GenMd:
 
     # 支持切换多种模型
     def load_my_llm(self, model_name="gpt-3.5-turbo"):
-        if model_name == "gpt-3.5-turbo":
-            self.llm = LoadMyLLM(model_name).run()
-            return
+        self.llm = LoadMyLLM(model_name).run()
+        return
 
     def load_language(self, language: str = "chinese"):
         if language == "chinese" or language == "chs":
@@ -120,6 +119,6 @@ class GenMd:
 
 
 if __name__ == "__main__":
-    md = GenMd("程序员", "开源项目如何运维")
+    md = GenMd("程序员", "开源项目如何运维", model_name="ernie-bot")
     run = md.run()
     print(run)
