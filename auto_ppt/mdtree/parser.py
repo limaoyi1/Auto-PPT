@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2023/8/17 10:10
+# @Author  : limaoyi
+# @File    : gen_ppt_md.py
+# @Software: PyCharm
+# @GitHub  : https://github.com/limaoyi1
 import re
 """
 这段代码是一个简单的 Markdown 解析器，用于解析 Markdown 格式的文本并构建相应的数据结构。它包含以下几个类和函数：

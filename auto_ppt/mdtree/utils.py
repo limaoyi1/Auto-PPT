@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2023/8/17 10:10
+# @Author  : limaoyi
+# @File    : gen_ppt_md.py
+# @Software: PyCharm
+# @GitHub  : https://github.com/limaoyi1
 import os
 import random
 bg_base_path = "./pptx_static/static/bg"
