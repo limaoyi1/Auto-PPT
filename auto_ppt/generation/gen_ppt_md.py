@@ -119,6 +119,6 @@ class GenMd:
 
 
 if __name__ == "__main__":
-    md = GenMd("程序员", "开源项目如何运维", model_name="ernie-bot")
+    md = GenMd("程序员", "如何成为架构师")
     run = md.run()
     print(run)
