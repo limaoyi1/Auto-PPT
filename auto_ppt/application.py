@@ -6,7 +6,7 @@
 # @GitHub  : https://github.com/limaoyi1
 import logging
 
-from flask import Flask, render_template, send_from_directory, request, Response
+from flask import Flask, request, Response
 from flask_cors import CORS
 from flask_restx import Api, fields, Resource
 from marshmallow import validate
@@ -30,10 +30,11 @@ handler.setFormatter(formatter)
 app.logger.addHandler(handler)
 
 app = Flask(__name__)
-api = Api(app)
+api = Api(app, version='3.0', title='Auto PPT API',
+          description='Auto PPT TodoMVC API',
+          )
 # 允许跨域
 CORS(app)
-
 
 # @app.route('/')
 # def index():
