@@ -28,10 +28,8 @@
 [//]: # (https://github.com/ikatyang/emoji-cheat-sheet 表情仓库)
 
 ## 🎞️ 项目介绍
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;制作演示文档常常是许多人繁重的日常任务，琐碎的文案、特效和格式使得这项工作可能每天都成为困扰。然而，随着AI浪潮的席卷，这一现状正在悄然发生着改变，而我恰巧踏上了AIGC应用开发的道路。
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这股AI浪潮中，我开始思考如何创造能够减轻人们负担的解决方案。Auto-PPT便是我首个成熟构想的产物，“登高必自卑，观远必自眇”,通过几个月的尝试和不断的优化，如今它已经越发成熟。
+&nbsp;&nbsp;&nbsp;&nbsp;一个完全开源的,免费的通过多种GPT大模型生成PPT的项目.
+拥有在线地编辑PPT功能的前端页面和兼容多种模型和语言的后端服务.
 
 ## 💥 重要更新
 

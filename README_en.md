@@ -29,10 +29,8 @@
 
 ## 🎞️ Project Introduction
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creating presentation documents is often a burdensome daily task for many people, with the need to handle tedious text, effects, and formatting, making it a persistent challenge. However, with the wave of AI advancements, this situation is quietly undergoing a transformation, and I happened to embark on the path of AIGC application development.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this AI wave, I began to ponder how to create solutions that can alleviate people's burdens. Auto-PPT is the first mature product of my conceptualization, "When climbing high, one must be humble; when viewing from afar, one must be modest." After months of experimentation and continuous optimization, it has matured considerably.
-
+&nbsp;&nbsp;&nbsp;&nbsp;A completely open source, free project that generates PPTs through various GPT models
+Front end pages with online PPT editing capabilities and backend services compatible with multiple models and languages
 ## 💥 Important Updates
 
 > 2023/8/18 | v3.0 Almost Completed Project Refactoring
