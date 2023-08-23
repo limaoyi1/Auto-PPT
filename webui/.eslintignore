@@ -1,0 +1,7 @@
+node_modules
+build
+src/statics
+public
+README.md
+package.json
+yarn.lock

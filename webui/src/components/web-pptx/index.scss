@@ -1,0 +1,58 @@
+.web-pptx{
+	.swiper {
+		width: 640px;
+		height: 360px;
+		.swiper-slide {
+			background: url("https://assets.mindshow.fun/themes/greenblue_countryside_vplus_20230720/Cover-bg.jpg");
+			background-size: 100% 100%;
+			position: relative;
+			.cover-slide{
+				width: 80%;
+				margin: 0 auto;
+				position: absolute;
+				top: 40%;
+				left: 10%;
+			}
+			.directory-slide{
+				padding: 9%;
+				box-sizing: border-box;
+				h2{
+					margin-top: 0;
+				}
+				>div:last-child{
+					display: flex;
+					flex-direction: column;
+				}
+			}
+
+			.common-slide {
+				.common{
+					position: relative;
+					padding: 5%;
+					box-sizing: border-box;
+					h2 {
+						margin-top: 0
+					}
+					&-content{
+						width: 60%;
+					}
+					&-list{
+						margin-top: 5px;
+						width: 60%;
+						padding-left: 20px;
+						box-sizing: border-box;
+						font-size: 4px;
+					}
+					&-img{
+						position: absolute;
+						left: 60%;
+						top: 0;
+						width: 40%;
+						height: 360px;
+						object-fit: fill;
+					}
+				}
+			}
+		}
+	}
+}
