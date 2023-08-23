@@ -35,32 +35,32 @@ api = Api(app)
 CORS(app)
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+#
+#
+# @app.route('/static/js/<filename>')
+# def serve_js(filename):
+#     return send_from_directory('./templates/static/js', filename)
+#
+#
+# @app.route('/static/css/<filename>')
+# def serve_css(filename):
+#     return send_from_directory('./templates/static/css', filename)
+#
+#
+# @app.route('/static/media/<filename>')
+# def serve_media(filename):
+#     return send_from_directory('./templates/static/media', filename)
+#
+#
+# @app.route('/<filename>')
+# def serve_json(filename):
+#     return send_from_directory('./templates/', filename)
 
 
-@app.route('/static/js/<filename>')
-def serve_js(filename):
-    return send_from_directory('./templates/static/js', filename)
-
-
-@app.route('/static/css/<filename>')
-def serve_css(filename):
-    return send_from_directory('./templates/static/css', filename)
-
-
-@app.route('/static/media/<filename>')
-def serve_media(filename):
-    return send_from_directory('./templates/static/media', filename)
-
-
-@app.route('/<filename>')
-def serve_json(filename):
-    return send_from_directory('./templates/', filename)
-
-
-generate_markdown_request = api.model('Content1', {
+generate_markdown_request = api.model('generate_markdown_request', {
     'profession': fields.String(required=True, validate=validate.Length(min=1), description='角色'),
     'topic': fields.String(required=True, validate=validate.Length(min=1), description='话题'),
     'model_name': fields.String(required=True, validate=validate.Length(min=1), description='模型名称'),
@@ -70,7 +70,7 @@ generate_markdown_request = api.model('Content1', {
 
 @api.route('/generate_markdown', methods=['POST'])
 class GenMarkdown(Resource):
-    @api.expect(api.model('Content1', generate_markdown_request), validate=True)
+    @api.expect(api.model('generate_markdown_request', generate_markdown_request), validate=True)
     def post(self):
         profession = request.json["profession"]
         topic = request.json["topic"]
@@ -83,7 +83,7 @@ class GenMarkdown(Resource):
         return Response(md, mimetype='application/octet-stream')
 
 
-smart_rewrite_request = api.model('Content2', {
+smart_rewrite_request = api.model('smart_rewrite_request', {
     'markdown': fields.String(required=True, validate=validate.Length(min=1), description='需要修改的markdown内容'),
     'model_name': fields.String(required=True, validate=validate.Length(min=1), description='模型名称'),
     'language': fields.String(required=True, validate=validate.Length(min=1), description='语言'),
@@ -93,7 +93,7 @@ smart_rewrite_request = api.model('Content2', {
 @api.route('/smart_rewrite', methods=['POST'])
 class SmartRewrite(Resource):
 
-    @api.expect(api.model('Content2', smart_rewrite_request), validate=True)
+    @api.expect(api.model('smart_rewrite_request', smart_rewrite_request), validate=True)
     def post(self):
         if request.method == "POST":
             markdown = request.json["markdown"]
@@ -108,7 +108,7 @@ class SmartRewrite(Resource):
             return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
 
 
-generate_verbatim_request = api.model('Content3', {
+generate_verbatim_request = api.model('generate_verbatim_request', {
     'markdown': fields.String(required=True, validate=validate.Length(min=1), description='全部的markdown内容'),
     'model_name': fields.String(required=True, validate=validate.Length(min=1), description='模型名称'),
     'language': fields.String(required=True, validate=validate.Length(min=1), description='语言'),
@@ -118,7 +118,7 @@ generate_verbatim_request = api.model('Content3', {
 @api.route('/generate_verbatim', methods=['POST'])
 class GenerateVerbatim(Resource):
 
-    @api.expect(api.model('Content3', generate_verbatim_request), validate=True)
+    @api.expect(api.model('generate_verbatim_request', generate_verbatim_request), validate=True)
     def post(self):
         if request.method == "POST":
             markdown = request.json["markdown"]
@@ -133,7 +133,7 @@ class GenerateVerbatim(Resource):
             return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
 
 
-smart_form_request = api.model('Content4', {
+smart_form_request = api.model('smart_form_request', {
     'markdown': fields.String(required=True, validate=validate.Length(min=1), description='需要改写的markdown内容'),
     'model_name': fields.String(required=True, validate=validate.Length(min=1), description='模型名称'),
     'language': fields.String(required=True, validate=validate.Length(min=1), description='语言'),
@@ -143,7 +143,7 @@ smart_form_request = api.model('Content4', {
 @api.route('/smart_form', methods=['POST'])
 class SmartForm(Resource):
 
-    @api.expect(api.model('Content4', smart_form_request), validate=True)
+    @api.expect(api.model('smart_form_request', smart_form_request), validate=True)
     def post(self):
         if request.method == "POST":
             markdown = request.json["markdown"]
