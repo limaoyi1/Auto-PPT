@@ -81,7 +81,7 @@ class GenMarkdown(Resource):
         app.logger.info(f'ip地址为 {ip_address}\t 请求生成PPT文本')
         gen = GenMd(profession, topic, model_name, language)
         md = gen.run()
-        return Response(md, mimetype='application/octet-stream')
+        return Response(md, mimetype='application/json')
 
 
 smart_rewrite_request = api.model('smart_rewrite_request', {
@@ -104,9 +104,9 @@ class SmartRewrite(Resource):
             app.logger.info(f'ip地址为 {ip_address}\t 请求智能改写')
             gen = OptimizeMd(model_name, language)
             rewrite = gen.smart_rewrite(markdown)
-            return Response(rewrite, mimetype='application/octet-stream')
+            return Response(rewrite, mimetype='application/json')
         elif request.method != "POST":
-            return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
+            return Response("不支持POST请求外的其他请求", mimetype='application/json')
 
 
 generate_verbatim_request = api.model('generate_verbatim_request', {
@@ -129,9 +129,9 @@ class GenerateVerbatim(Resource):
             app.logger.info(f'ip地址为 {ip_address}\t 请求生成逐字稿')
             gen = OptimizeMd(model_name, language)
             rewrite = gen.generate_verbatim(markdown)
-            return Response(rewrite, mimetype='application/octet-stream')
+            return Response(rewrite, mimetype='application/json')
         elif request.method != "POST":
-            return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
+            return Response("不支持POST请求外的其他请求", mimetype='application/json')
 
 
 smart_form_request = api.model('smart_form_request', {
@@ -154,9 +154,9 @@ class SmartForm(Resource):
             app.logger.info(f'ip地址为 {ip_address}\t 请求智能改写')
             gen = OptimizeMd(model_name, language)
             rewrite = gen.smart_form(markdown)
-            return Response(rewrite, mimetype='application/octet-stream')
+            return Response(rewrite, mimetype='application/json')
         elif request.method != "POST":
-            return Response("不支持POST请求外的其他请求", mimetype='application/octet-stream')
+            return Response("不支持POST请求外的其他请求", mimetype='application/json')
 
 
 if __name__ == '__main__':
