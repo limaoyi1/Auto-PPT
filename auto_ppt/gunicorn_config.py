@@ -5,3 +5,4 @@ workers = 4
 env = {
     "FLASK_ENV": "test"
 }
+timeout = 600
