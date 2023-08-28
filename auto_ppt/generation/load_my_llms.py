@@ -15,9 +15,12 @@ from readconfig.myconfig import MyConfig, ConfigIniError
 # 指定编码为 UTF-8
 # 获取当前运行的Python文件的绝对路径 对相同的问题进行缓存
 current_file_path = os.path.abspath(__file__)
-base = current_file_path.replace("load_my_llms.py", "") + "../sqlite/"
 
-langchain.llm_cache = SQLiteCache(database_path=base + ".langchain.db")
+parent_folder = os.path.dirname(os.path.dirname(current_file_path))
+
+sqlite_path = os.path.join(parent_folder, "sqlite")
+
+langchain.llm_cache = SQLiteCache(database_path=sqlite_path)
 
 
 class LoadMyLLM(object):
