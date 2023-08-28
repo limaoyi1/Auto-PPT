@@ -18,9 +18,13 @@ current_file_path = os.path.abspath(__file__)
 
 parent_folder = os.path.dirname(os.path.dirname(current_file_path))
 
-sqlite_path = os.path.join(parent_folder, "sqlite")
+sqlite_folder_path = os.path.join(parent_folder, "sqlite")
+
+sqlite_path = os.path.join(sqlite_folder_path, ".langchain.db")
 
 langchain.llm_cache = SQLiteCache(database_path=sqlite_path)
+
+print("数据库预设地址:{}".format(sqlite_path))
 
 
 class LoadMyLLM(object):
