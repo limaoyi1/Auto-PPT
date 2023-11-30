@@ -41,13 +41,6 @@
 > This motivates us to continuously improve and develop new features to enhance your experience with Auto_PPT.
 
 > "Special thanks to [Miraitowa-wsy](https://github.com/Miraitowa-wsy) for their sponsorship."
-## 🛸 Free Trial
-
-> New Version Trial Link 🔗: [Trial Link](http://www.limaoyi.top:4399/#)
-
-> 🧭 Get a professionally designed PPT in just 2-3 minutes. The generation time depends on the speed of the OpenAI interface, ensuring efficient and reliable operation.
-
-> 🔗 Try it now, let's explore the magic of Auto_PPT together! Please note that, to maintain limited server traffic, we do not currently provide random image services.
 
 ## 🧲 Project Advantages
 
